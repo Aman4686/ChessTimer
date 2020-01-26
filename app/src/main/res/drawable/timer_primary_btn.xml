@@ -5,8 +5,9 @@
         android:topLeftRadius="0sp"/>
 
     <gradient
-        android:startColor="@color/gradientPartTwo"
-        android:endColor="@color/gradientPartOne"
+        android:startColor="@color/gradientPartOne"
+        android:centerColor="@color/gradientPartOne"
+        android:endColor="@color/gradientPartTwo"
         android:angle="45"/>
     <padding android:left="0dp" android:top="0dp" android:right="0dp" android:bottom="0dp" />
 </shape>

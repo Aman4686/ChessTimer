@@ -13,12 +13,12 @@
         android:background="@color/colorDark"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="20sp"
+        android:padding="15sp"
         android:orientation="vertical">
 
         <LinearLayout
             android:rotation="180"
-            app:invertMainBtnColor="@{viewModel.model.booleanValue()}"
+            app:invertPrimaryTopBtnColor="@{viewModel.timerModel.gameState}"
             android:onClick="@{viewModel::onTopButtonClicked}"
             android:id="@+id/top_timer_button"
             android:layout_width="match_parent"
@@ -28,13 +28,15 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
+                app:changeTopTextColor="@{viewModel.timerModel.gameState}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="5:00"
                 android:textSize="100sp" />
         </LinearLayout>
         <TextView
-            app:invertSecondaryBtnColor="@{viewModel.model.booleanValue()}"
+            app:changeTopTextColor="@{viewModel.timerModel.gameState}"
+            app:invertSecondaryTopBtnColor="@{viewModel.timerModel.gameState}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingTop="4sp"
@@ -53,6 +55,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
             <TextView
+                android:id="@+id/pause_timer"
                 android:gravity="center"
                 android:layout_weight="1"
                 android:layout_width="0sp"
@@ -61,6 +64,7 @@
                 android:textColor="@color/colorPrimary"
                 android:text="стоп"/>
             <TextView
+                android:id="@+id/reset_timer"
                 android:gravity="center"
                 android:layout_weight="1"
                 android:layout_width="0sp"
@@ -69,16 +73,16 @@
                 android:textColor="@color/colorPrimary"
                 android:text="зано"/>
             <TextView
+                android:id="@+id/start_timer"
                 android:gravity="center"
                 android:layout_weight="1"
                 android:layout_width="0sp"
                 android:layout_height="wrap_content"
                 android:textSize="40sp"
                 android:textColor="@color/colorPrimary"
-                android:text="вкл"/>
+                tools:text="вкл"/>
         </LinearLayout>
         <TextView
-            app:invertSecondaryBtnColor="@{!viewModel.model.booleanValue()}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="40sp"
@@ -86,25 +90,29 @@
             android:paddingStart="8sp"
             android:paddingEnd="8sp"
             android:text="5:00"
+            app:changeBottomTextColor="@{viewModel.timerModel.gameState}"
+            app:invertSecondaryBottomBtnColor="@{viewModel.timerModel.gameState}"
             app:layout_constraintBottom_toTopOf="@id/bottom_timer_button"
             app:layout_constraintStart_toStartOf="parent"/>
+
         <LinearLayout
-            app:invertMainBtnColor="@{!viewModel.model.booleanValue()}"
-            android:onClick="@{viewModel::onBottomButtonClicked}"
-            android:gravity="center"
-            app:layout_constraintBottom_toBottomOf="parent"
             android:id="@+id/bottom_timer_button"
             android:layout_width="match_parent"
             android:layout_height="200sp"
+            android:gravity="center"
             android:orientation="horizontal"
-            >
+            android:clickable="true"
+            android:onClick="@{viewModel::onBottomButtonClicked}"
+            app:invertPrimaryBottomBtnColor="@{viewModel.timerModel.gameState}"
+            app:layout_constraintBottom_toBottomOf="parent">
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/bottom_timer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="5:00"
-                android:textSize="100sp"/>
+                android:textSize="100sp"
+                app:changeBottomTextColor="@{viewModel.timerModel.gameState}" />
 
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.chesstimer.Base.BaseFragment
+import com.example.chesstimer.basic.BaseFragment
 
 class TimerFragment(private val navigation: Lazy<TimerViewModel>) : BaseFragment() {
 

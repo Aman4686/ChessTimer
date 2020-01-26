@@ -1,4 +1,4 @@
-package com.example.chesstimer.base
+package com.example.chesstimer.basic
 
 import android.view.View
 

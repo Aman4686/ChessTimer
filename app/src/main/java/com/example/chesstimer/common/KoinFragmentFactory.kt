@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentFactory
 import androidx.preference.PreferenceFragmentCompat
-import com.example.chesstimer.Base.BaseFragment
+import com.example.chesstimer.basic.BaseFragment
 import com.example.mymvvptest.mvvmm.javakoin.JavaKoin
 
 class KoinFragmentFactory(private val activity: AppCompatActivity) : FragmentFactory(){
