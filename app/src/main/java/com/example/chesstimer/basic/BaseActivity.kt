@@ -1,4 +1,4 @@
-package com.example.chesstimer.Base
+package com.example.chesstimer.base
 
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
