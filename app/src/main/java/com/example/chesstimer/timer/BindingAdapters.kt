@@ -14,8 +14,9 @@ object BindingAdapters{
         val context = context
         if(gameState != null)
         background = when(gameState) {
+            GameState.NO_ONE -> context.getDrawable(R.color.colorDark)
             GameState.PLAYER_TOP -> context.getDrawable(R.drawable.timer_primary_btn)
-                            else -> context.getDrawable(R.color.colorDark)
+            else -> context.getDrawable(R.color.colorDark)
         }
     }
     @BindingAdapter("invertPrimaryBottomBtnColor")
@@ -24,8 +25,9 @@ object BindingAdapters{
         val context = context
         if(gameState != null)
             background = when(gameState) {
+                GameState.NO_ONE -> context.getDrawable(R.color.colorDark)
                 GameState.PLAYER_BOTTOM -> context.getDrawable(R.drawable.timer_primary_btn)
-                                   else -> context.getDrawable(R.color.colorDark)
+                else -> context.getDrawable(R.color.colorDark)
             }
     }
 
@@ -36,8 +38,9 @@ object BindingAdapters{
         val context = context
         if(gameState != null)
             background = when(gameState) {
+                GameState.NO_ONE -> context.getDrawable(R.color.colorDark)
                 GameState.PLAYER_TOP ->  context.getDrawable(R.drawable.timer_secondary_btn)
-                                else -> context.getDrawable(R.color.colorDark)
+                else -> context.getDrawable(R.color.colorDark)
             }
 
     }
@@ -48,8 +51,9 @@ object BindingAdapters{
         val context = context
         if(gameState != null)
             background = when(gameState) {
-                GameState.PLAYER_BOTTOM ->  context.getDrawable(R.drawable.timer_secondary_btn)
-                                   else -> context.getDrawable(R.color.colorDark)
+                GameState.NO_ONE -> context.getDrawable(R.color.colorDark)
+                GameState.PLAYER_BOTTOM -> context.getDrawable(R.drawable.timer_secondary_btn)
+                            else -> context.getDrawable(R.color.colorDark)
             }
 
     }
@@ -61,8 +65,9 @@ object BindingAdapters{
         if (gameState != null)
             setTextColor(
                 when (gameState) {
+                    GameState.NO_ONE ->ContextCompat.getColor(context, R.color.colorWhite)
                     GameState.PLAYER_TOP -> ContextCompat.getColor(context, R.color.colorDark)
-                                    else -> ContextCompat.getColor(context, R.color.colorWhite)
+                        else -> ContextCompat.getColor(context, R.color.colorWhite)
                 }
             )
         }
@@ -74,8 +79,9 @@ object BindingAdapters{
         if (gameState != null)
             setTextColor(
                 when (gameState) {
+                    GameState.NO_ONE ->ContextCompat.getColor(context, R.color.colorWhite)
                     GameState.PLAYER_BOTTOM -> ContextCompat.getColor(context, R.color.colorDark)
-                                       else -> ContextCompat.getColor(context, R.color.colorWhite)
+                    else -> ContextCompat.getColor(context, R.color.colorWhite)
                 }
             )
     }

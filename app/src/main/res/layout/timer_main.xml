@@ -10,10 +10,10 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:background="@color/colorDark"
+        android:background="@color/colorDarkBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="15sp"
+        android:padding="8sp"
         android:orientation="vertical">
 
         <LinearLayout
@@ -28,13 +28,15 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
+                android:id="@+id/top_primary_timer"
                 app:changeTopTextColor="@{viewModel.timerModel.gameState}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="5:00"
-                android:textSize="100sp" />
+                android:textSize="130sp" />
         </LinearLayout>
         <TextView
+            android:id="@+id/top_secondary_timer"
             app:changeTopTextColor="@{viewModel.timerModel.gameState}"
             app:invertSecondaryTopBtnColor="@{viewModel.timerModel.gameState}"
             android:layout_width="wrap_content"
@@ -62,8 +64,10 @@
                 android:layout_height="wrap_content"
                 android:textSize="40sp"
                 android:textColor="@color/colorPrimary"
+                android:onClick="@{viewModel::onPausedTimerClicked}"
                 android:text="стоп"/>
             <TextView
+                android:onClick="@{viewModel::onResetTimerClicked}"
                 android:id="@+id/reset_timer"
                 android:gravity="center"
                 android:layout_weight="1"
@@ -80,9 +84,10 @@
                 android:layout_height="wrap_content"
                 android:textSize="40sp"
                 android:textColor="@color/colorPrimary"
-                tools:text="вкл"/>
+                android:text="X"/>
         </LinearLayout>
         <TextView
+            android:id="@+id/bottom_secondary_timer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="40sp"
@@ -107,11 +112,11 @@
             app:layout_constraintBottom_toBottomOf="parent">
 
             <TextView
-                android:id="@+id/bottom_timer"
+                android:id="@+id/bottom_primary_timer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="5:00"
-                android:textSize="100sp"
+                android:textSize="130sp"
                 app:changeBottomTextColor="@{viewModel.timerModel.gameState}" />
 
         </LinearLayout>
