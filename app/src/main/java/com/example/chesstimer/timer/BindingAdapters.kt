@@ -6,6 +6,7 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import com.example.chesstimer.R
 import com.example.chesstimer.common.timer.GameState
+import com.example.chesstimer.common.timer.TimerState
 
 object BindingAdapters{
     @BindingAdapter("invertPrimaryTopBtnColor")
@@ -84,5 +85,5 @@ object BindingAdapters{
                     else -> ContextCompat.getColor(context, R.color.colorWhite)
                 }
             )
-    }
+        }
 }
