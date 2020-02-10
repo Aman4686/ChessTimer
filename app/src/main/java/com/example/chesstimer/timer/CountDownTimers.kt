@@ -24,6 +24,7 @@ class Timers(var gameTime: Long,
     }
 
     fun resetTimers(){
+        pausedTimers()
         bottomPlayerTimeLeft = gameTime
         topPlayerTimeLeft = gameTime
         prepareTimers()
