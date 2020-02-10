@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
     <data>
-        <import type="com.example.chesstimer.R" />
         <variable
             name="viewModel"
             type="com.example.chesstimer.timer.TimerViewModel" />
@@ -18,7 +17,7 @@
 
         <LinearLayout
             android:rotation="180"
-            app:invertPrimaryTopBtnColor="@{viewModel.timerModel.gameState}"
+            android:background="@{viewModel.getInvertPrimaryTopBtnColor(context)}"
             android:onClick="@{viewModel::onTopButtonClicked}"
             android:id="@+id/top_timer_button"
             android:layout_width="match_parent"
@@ -29,7 +28,7 @@
 
             <TextView
                 android:id="@+id/top_primary_timer"
-                app:changeTopTextColor="@{viewModel.timerModel.gameState}"
+                android:textColor="@{viewModel.getTopTextColor(context)}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="5:00"
@@ -37,8 +36,8 @@
         </LinearLayout>
         <TextView
             android:id="@+id/top_secondary_timer"
-            app:changeTopTextColor="@{viewModel.timerModel.gameState}"
-            app:invertSecondaryTopBtnColor="@{viewModel.timerModel.gameState}"
+            android:textColor="@{viewModel.getTopTextColor(context)}"
+            android:background="@{viewModel.getInvertSecondaryTopBtnColor(context)}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingTop="4sp"
@@ -95,8 +94,8 @@
             android:paddingStart="8sp"
             android:paddingEnd="8sp"
             android:text="5:00"
-            app:changeBottomTextColor="@{viewModel.timerModel.gameState}"
-            app:invertSecondaryBottomBtnColor="@{viewModel.timerModel.gameState}"
+            android:textColor="@{viewModel.getBottomTextColor(context)}"
+            android:background="@{viewModel.getInvertSecondaryBottomBtnColor(context)}"
             app:layout_constraintBottom_toTopOf="@id/bottom_timer_button"
             app:layout_constraintStart_toStartOf="parent"/>
 
@@ -108,7 +107,7 @@
             android:orientation="horizontal"
             android:clickable="true"
             android:onClick="@{viewModel::onBottomButtonClicked}"
-            app:invertPrimaryBottomBtnColor="@{viewModel.timerModel.gameState}"
+            android:background="@{viewModel.getInvertPrimaryBottomBtnColor(context)}"
             app:layout_constraintBottom_toBottomOf="parent">
 
             <TextView
@@ -117,7 +116,7 @@
                 android:layout_height="wrap_content"
                 android:text="5:00"
                 android:textSize="130sp"
-                app:changeBottomTextColor="@{viewModel.timerModel.gameState}" />
+                android:textColor="@{viewModel.getBottomTextColor(context)}" />
 
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
