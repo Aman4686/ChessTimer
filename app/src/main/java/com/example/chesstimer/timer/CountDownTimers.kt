@@ -7,11 +7,11 @@ import android.widget.TextView
 import com.example.chesstimer.common.TimerUtils
 import com.example.chesstimer.common.timer.GameState
 
-class Timers(var gameTime: Long,
-             private val bottomPrimaryTimer : TextView,
-             private val topPrimaryTimer : TextView,
-             private val bottomSecondaryTimer : TextView,
-             private val topSecondaryTimer : TextView){
+class CountDownTimers(var gameTime: Long,
+                      private val bottomPrimaryTimer : TextView,
+                      private val topPrimaryTimer : TextView,
+                      private val bottomSecondaryTimer : TextView,
+                      private val topSecondaryTimer : TextView){
 
     private var bottomPlayerTimeLeft = gameTime
     private var topPlayerTimeLeft = gameTime

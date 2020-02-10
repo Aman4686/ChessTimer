@@ -7,9 +7,9 @@ import com.example.chesstimer.R
 import com.example.chesstimer.common.timer.GameState
 import com.example.chesstimer.common.timer.TimerState
 
-data class TimerLiveData(var gameState: GameState = GameState.NO_ONE,
-                         var timerState: TimerState = TimerState.PAUSED,
-                         var maxTimeCountMillis: Long = 40000L){
+data class TimerData(var gameState: GameState = GameState.NO_ONE,
+                     var timerState: TimerState = TimerState.PAUSED,
+                     var maxTimeCountMillis: Long = 40000L){
 
 
 

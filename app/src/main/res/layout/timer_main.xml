@@ -14,10 +14,10 @@
         android:layout_height="match_parent"
         android:padding="8sp"
         android:orientation="vertical">
-
+        
         <LinearLayout
             android:rotation="180"
-            android:background="@{viewModel.getInvertPrimaryTopBtnColor(context)}"
+            android:background="@{viewModel.timerDataModel.getInvertPrimaryTopBtnColor(context)}"
             android:onClick="@{viewModel::onTopButtonClicked}"
             android:id="@+id/top_timer_button"
             android:layout_width="match_parent"
@@ -28,23 +28,23 @@
 
             <TextView
                 android:id="@+id/top_primary_timer"
-                android:textColor="@{viewModel.getTopTextColor(context)}"
+                android:textColor="@{viewModel.timerDataModel.getTopTextColor(context)}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="5:00"
+                tools:text="5:00"
                 android:textSize="130sp" />
         </LinearLayout>
         <TextView
             android:id="@+id/top_secondary_timer"
-            android:textColor="@{viewModel.getTopTextColor(context)}"
-            android:background="@{viewModel.getInvertSecondaryTopBtnColor(context)}"
+            android:textColor="@{viewModel.timerDataModel.getTopTextColor(context)}"
+            android:background="@{viewModel.timerDataModel.getInvertSecondaryTopBtnColor(context)}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingTop="4sp"
             android:paddingStart="8sp"
             android:paddingEnd="8sp"
             android:textSize="40sp"
-            android:text="5:00"
+            tools:text="5:00"
             android:rotation="180"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/top_timer_button" />
@@ -93,9 +93,9 @@
             android:paddingTop="4sp"
             android:paddingStart="8sp"
             android:paddingEnd="8sp"
-            android:text="5:00"
-            android:textColor="@{viewModel.getBottomTextColor(context)}"
-            android:background="@{viewModel.getInvertSecondaryBottomBtnColor(context)}"
+            tools:text="5:00"
+            android:textColor="@{viewModel.timerDataModel.getBottomTextColor(context)}"
+            android:background="@{viewModel.timerDataModel.getInvertSecondaryBottomBtnColor(context)}"
             app:layout_constraintBottom_toTopOf="@id/bottom_timer_button"
             app:layout_constraintStart_toStartOf="parent"/>
 
@@ -107,16 +107,16 @@
             android:orientation="horizontal"
             android:clickable="true"
             android:onClick="@{viewModel::onBottomButtonClicked}"
-            android:background="@{viewModel.getInvertPrimaryBottomBtnColor(context)}"
+            android:background="@{viewModel.timerDataModel.getInvertPrimaryBottomBtnColor(context)}"
             app:layout_constraintBottom_toBottomOf="parent">
 
             <TextView
                 android:id="@+id/bottom_primary_timer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="5:00"
+                tools:text="5:00"
                 android:textSize="130sp"
-                android:textColor="@{viewModel.getBottomTextColor(context)}" />
+                android:textColor="@{viewModel.timerDataModel.getBottomTextColor(context)}" />
 
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
