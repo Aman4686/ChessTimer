@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
     <data>
+        <import type="com.example.chesstimer.common.TimerUtils"/>
         <variable
             name="viewModel"
             type="com.example.chesstimer.timer.TimerViewModel" />

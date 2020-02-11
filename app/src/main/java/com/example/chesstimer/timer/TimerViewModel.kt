@@ -4,32 +4,37 @@ import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.chesstimer.common.navigation.TimerNavigator
-import com.example.chesstimer.common.timer.GameState
-import com.example.chesstimer.common.timer.TimerState
+import com.example.chesstimer.common.states.GameTurnState
+import com.example.chesstimer.common.states.TimerState
 import javax.inject.Inject
 
 class TimerViewModel @Inject constructor(var navigator: TimerNavigator) : ViewModel() {
 
-    var timerDataModel : MutableLiveData<TimerData> = MutableLiveData(
-        TimerData()
-    )
-
+    var timerDataModel = MutableLiveData(TimerData())
 
     fun onTopButtonClicked(v : View) {
         val timer = timerDataModel.value
-        if (timer != null && timer.gameState != GameState.PLAYER_BOTTOM) {
-            timer.timerState = TimerState.RUNNING
-            timer.gameState = GameState.PLAYER_BOTTOM
-            timerDataModel.value = timer
+        if(timer != null) {
+            val isNotFinished = timer.timerState != TimerState.FINISHED
+            val isTopPlayerTurn = timer.gameTurnState != GameTurnState.PLAYER_BOTTOM
+            if (isTopPlayerTurn && isNotFinished) {
+                timer.timerState = TimerState.RUNNING
+                timer.gameTurnState = GameTurnState.PLAYER_BOTTOM
+                timerDataModel.value = timer
+            }
         }
     }
 
     fun onBottomButtonClicked(v : View) {
         val timer = timerDataModel.value
-        if (timer != null && timer.gameState != GameState.PLAYER_TOP) {
-            timer.timerState = TimerState.RUNNING
-            timer.gameState = GameState.PLAYER_TOP
-            timerDataModel.value = timer
+        if(timer != null) {
+            val isNotFinished = timer.timerState != TimerState.FINISHED
+            val isBottomPlayerTurn = timer.gameTurnState != GameTurnState.PLAYER_TOP
+            if (isBottomPlayerTurn && isNotFinished) {
+                timer.timerState = TimerState.RUNNING
+                timer.gameTurnState = GameTurnState.PLAYER_TOP
+                timerDataModel.value = timer
+            }
         }
     }
 
@@ -37,7 +42,7 @@ class TimerViewModel @Inject constructor(var navigator: TimerNavigator) : ViewMo
         val timer = timerDataModel.value
         if (timer != null) {
             timer.timerState = TimerState.PAUSED
-            timer.gameState = GameState.NO_ONE
+            timer.gameTurnState = GameTurnState.NO_ONE
             timerDataModel.value = timer
         }
     }
@@ -46,10 +51,16 @@ class TimerViewModel @Inject constructor(var navigator: TimerNavigator) : ViewMo
         val timer = timerDataModel.value
         if (timer != null) {
             timer.timerState = TimerState.RESETED
-            timer.gameState = GameState.NO_ONE
+            timer.gameTurnState = GameTurnState.NO_ONE
             timerDataModel.value = timer
         }
     }
 
-
+    fun gameFinished(){
+        val timer = timerDataModel.value
+        if (timer != null) {
+            timer.timerState = TimerState.FINISHED
+            timerDataModel.value = timer
+        }
+    }
 }

@@ -1,9 +1,8 @@
-package com.example.chesstimer.dagger2
+package com.example.chesstimer.module
 
 import androidx.appcompat.app.AppCompatActivity
 import com.example.chesstimer.common.navigation.TimerNavigation
 import com.example.chesstimer.common.navigation.TimerNavigator
-import com.example.chesstimer.timer.TimerViewModel
 import dagger.Module
 import dagger.Provides
 

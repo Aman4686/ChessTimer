@@ -12,7 +12,7 @@ import androidx.lifecycle.Observer
 
 import com.example.chesstimer.R
 import com.example.chesstimer.basic.BaseView
-import com.example.chesstimer.common.timer.TimerState
+import com.example.chesstimer.common.states.TimerState
 import com.example.chesstimer.databinding.TimerMainBinding
 
 
@@ -39,8 +39,9 @@ class TimerView(@NonNull inflater: LayoutInflater, @NonNull lifecycleOwner: Life
         initIds()
         val timer = CountDownTimers(
             gameTime, bottomPrimaryTimer, topPrimaryTimer,
-            bottomSecondaryTimer, topSecondaryTimer
-        )
+            bottomSecondaryTimer, topSecondaryTimer,
+            model)
+
 
         model.timerDataModel.observe(lifecycleOwner, Observer {
 
@@ -49,7 +50,7 @@ class TimerView(@NonNull inflater: LayoutInflater, @NonNull lifecycleOwner: Life
             }
 
             if(it.timerState == TimerState.RUNNING)
-                timer.startTimer(it.gameState)
+                timer.startTimer(it.gameTurnState)
 
             if(it.timerState == TimerState.RESETED) {
                 timer.resetTimers()

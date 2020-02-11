@@ -5,13 +5,14 @@ import android.os.CountDownTimer
 import android.widget.TextView
 
 import com.example.chesstimer.common.TimerUtils
-import com.example.chesstimer.common.timer.GameState
+import com.example.chesstimer.common.states.GameTurnState
 
 class CountDownTimers(var gameTime: Long,
                       private val bottomPrimaryTimer : TextView,
                       private val topPrimaryTimer : TextView,
                       private val bottomSecondaryTimer : TextView,
-                      private val topSecondaryTimer : TextView){
+                      private val topSecondaryTimer : TextView,
+                      private val model : TimerViewModel){
 
     private var bottomPlayerTimeLeft = gameTime
     private var topPlayerTimeLeft = gameTime
@@ -21,6 +22,7 @@ class CountDownTimers(var gameTime: Long,
 
     init {
         prepareTimers()
+        updateTimers()
     }
 
     fun resetTimers(){
@@ -36,13 +38,13 @@ class CountDownTimers(var gameTime: Long,
         timerTop?.cancel()
     }
 
-    fun startTimer(gameState: GameState) {
-        when(gameState){
-            GameState.PLAYER_TOP -> {
+    fun startTimer(gameTurnState: GameTurnState) {
+        when(gameTurnState){
+            GameTurnState.PLAYER_TOP -> {
                 prepareTimerTopTimer()
                 timerTop?.start()
                 timerBottom?.cancel()
-            } GameState.PLAYER_BOTTOM -> {
+            } GameTurnState.PLAYER_BOTTOM -> {
                 prepareTimerBottomTimer()
                 timerTop?.cancel()
                 timerBottom?.start()
@@ -75,7 +77,7 @@ class CountDownTimers(var gameTime: Long,
     private fun prepareTimerTopTimer(){
         timerTop = object : CountDownTimer(topPlayerTimeLeft , TimerUtils.secondsToMillis(1)){
             override fun onFinish() {
-                timerTop?.cancel()
+                model.gameFinished()
             }
 
             override fun onTick(millisUntilFinished: Long) {
@@ -88,7 +90,7 @@ class CountDownTimers(var gameTime: Long,
     private fun prepareTimerBottomTimer() {
         timerBottom = object : CountDownTimer(bottomPlayerTimeLeft, 1000) {
             override fun onFinish() {
-                timerBottom?.cancel()
+                model.gameFinished()
             }
 
             override fun onTick(millisUntilFinished: Long) {
