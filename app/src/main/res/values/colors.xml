@@ -5,8 +5,8 @@
     <color name="colorAccent">#D81B60</color>
     <color name="colorDarkBackground">#242424</color>
     <color name="colorDark">#272727</color>
+    
     <color name="colorWhite">#ADADAD</color>
-
     <color name="touchEffect">#11FFFFFF</color>
 
     <color name="gradientPartOne">#F3904F</color>

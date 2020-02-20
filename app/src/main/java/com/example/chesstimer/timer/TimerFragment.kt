@@ -1,22 +1,24 @@
 package com.example.chesstimer.timer
 
 import android.os.Bundle
-import android.text.format.Time
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.chesstimer.MainActivity
+import androidx.lifecycle.ViewModelProvider
 import com.example.chesstimer.basic.BaseFragment
-import javax.inject.Inject
+
 
 class TimerFragment : BaseFragment() {
 
-    @Inject
     lateinit var model : TimerViewModel
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        model = ViewModelProvider(this)[TimerViewModel::class.java]
+    }
 
-        MainActivity.appComponent.injectTimerFragment(this)
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         val timerView = TimerView(inflater ,this , container!! , model)
 

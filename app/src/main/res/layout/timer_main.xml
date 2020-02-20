@@ -49,43 +49,45 @@
             android:rotation="180"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/top_timer_button" />
-        <LinearLayout
+        <FrameLayout
+            android:layout_marginStart="20sp"
+            android:layout_marginEnd="20sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
-            <TextView
+            <ImageView
+                android:layout_gravity="start"
                 android:id="@+id/pause_timer"
-                android:gravity="center"
-                android:layout_weight="1"
-                android:layout_width="0sp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="40sp"
                 android:textColor="@color/colorPrimary"
                 android:onClick="@{viewModel::onPausedTimerClicked}"
-                android:text="стоп"/>
-            <TextView
+                android:src="@drawable/ic_pause"/>
+            <ImageView
+                android:layout_gravity="center"
                 android:onClick="@{viewModel::onResetTimerClicked}"
                 android:id="@+id/reset_timer"
-                android:gravity="center"
-                android:layout_weight="1"
-                android:layout_width="0sp"
+                android:src="@drawable/ic_refresh"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="40sp"
                 android:textColor="@color/colorPrimary"
-                android:text="зано"/>
-            <TextView
+               />
+            <ImageView
+                android:layout_gravity="end"
+                android:src="@drawable/ic_settings"
                 android:id="@+id/start_timer"
                 android:gravity="center"
-                android:layout_weight="1"
-                android:layout_width="0sp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="40sp"
                 android:textColor="@color/colorPrimary"
                 android:text="X"/>
-        </LinearLayout>
+        </FrameLayout>
         <TextView
             android:id="@+id/bottom_secondary_timer"
             android:layout_width="wrap_content"

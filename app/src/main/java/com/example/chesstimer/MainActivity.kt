@@ -1,8 +1,11 @@
 package com.example.chesstimer
 
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.example.chesstimer.basic.BaseActivity
 import com.example.chesstimer.module.NavModule
+import dagger.Module
+import dagger.Provides
 
 
 class MainActivity : BaseActivity() {
@@ -23,14 +26,5 @@ class MainActivity : BaseActivity() {
             .build()
     }
 
-
-    override fun onDestroy() {
-        releaseMainComponent()
-        super.onDestroy()
-    }
-
-    private fun releaseMainComponent() {
-
-    }
 
 }

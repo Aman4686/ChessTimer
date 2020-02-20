@@ -3,14 +3,23 @@ package com.example.chesstimer.timer
 import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.chesstimer.App
+import com.example.chesstimer.MainActivity
 import com.example.chesstimer.common.navigation.TimerNavigator
 import com.example.chesstimer.common.states.GameTurnState
 import com.example.chesstimer.common.states.TimerState
 import javax.inject.Inject
 
-class TimerViewModel @Inject constructor(var navigator: TimerNavigator) : ViewModel() {
+class TimerViewModel : ViewModel() {
 
-    var timerDataModel = MutableLiveData(TimerData())
+    @Inject
+    lateinit var navigator : TimerNavigator
+
+    init {
+        MainActivity.appComponent.inject(this)
+    }
+
+    val timerDataModel = MutableLiveData(TimerData())
 
     fun onTopButtonClicked(v : View) {
         val timer = timerDataModel.value
