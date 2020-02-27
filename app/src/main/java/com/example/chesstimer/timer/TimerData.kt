@@ -31,7 +31,7 @@ data class TimerData(var gameTurnState: GameTurnState = GameTurnState.NO_ONE,
             val color = getPrimaryBtnColor(timerState , context)
             return when (gameTurnState) {
                 GameTurnState.PLAYER_TOP -> color
-                else -> context.getDrawable(R.color.colorDark)
+                else -> context.getDrawable(R.color.transparent)
             }
     }
 

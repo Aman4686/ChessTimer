@@ -45,16 +45,15 @@ class TimerView(@NonNull inflater: LayoutInflater, @NonNull lifecycleOwner: Life
 
         model.timerDataModel.observe(lifecycleOwner, Observer {
 
-            if(it.timerState == TimerState.PAUSED) {
+            if(it.timerState == TimerState.PAUSED)
                 timer.pausedTimers()
-            }
 
             if(it.timerState == TimerState.RUNNING)
                 timer.startTimer(it.gameTurnState)
 
-            if(it.timerState == TimerState.RESETED) {
+            if(it.timerState == TimerState.RESETED)
                 timer.resetTimers()
-            }
+
         })
     }
 

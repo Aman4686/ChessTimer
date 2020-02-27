@@ -46,8 +46,8 @@ class CountDownTimers(var gameTime: Long,
                 timerBottom?.cancel()
             } GameTurnState.PLAYER_BOTTOM -> {
                 prepareTimerBottomTimer()
-                timerTop?.cancel()
                 timerBottom?.start()
+                timerTop?.cancel()
             }
         }
     }

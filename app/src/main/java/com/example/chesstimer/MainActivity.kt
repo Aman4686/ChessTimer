@@ -1,11 +1,8 @@
 package com.example.chesstimer
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import com.example.chesstimer.basic.BaseActivity
 import com.example.chesstimer.module.NavModule
-import dagger.Module
-import dagger.Provides
 
 
 class MainActivity : BaseActivity() {
@@ -17,7 +14,7 @@ class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initialiseAppComponent()
-        setContentView(R.layout.navigation_container_fragment)
+        setContentView(R.layout.nav_container)
     }
 
     private fun initialiseAppComponent(){
