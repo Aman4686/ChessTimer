@@ -108,7 +108,6 @@
             android:layout_height="200sp"
             android:gravity="center"
             android:orientation="horizontal"
-            android:clickable="true"
             android:onClick="@{viewModel::onBottomButtonClicked}"
             android:background="@{viewModel.timerDataModel.getInvertPrimaryBottomBtnColor(context)}"
             app:layout_constraintBottom_toBottomOf="parent">

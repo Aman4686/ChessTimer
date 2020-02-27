@@ -39,7 +39,7 @@ data class TimerData(var gameTurnState: GameTurnState = GameTurnState.NO_ONE,
         val color = getPrimaryBtnColor(timerState , context)
             return when (gameTurnState) {
                 GameTurnState.PLAYER_BOTTOM -> color
-                else -> context.getDrawable(R.color.colorDark)
+                else -> context.getDrawable(R.color.transparent)
             }
     }
 
@@ -47,14 +47,14 @@ data class TimerData(var gameTurnState: GameTurnState = GameTurnState.NO_ONE,
         val color = getSecondaryBtnColor(timerState , context)
            return when (gameTurnState) {
                 GameTurnState.PLAYER_TOP -> color
-                else -> context.getDrawable(R.color.colorDark)
+                else -> context.getDrawable(R.color.transparent)
             }
     }
     fun getInvertSecondaryBottomBtnColor(context : Context) : Drawable? {
         val color = getSecondaryBtnColor(timerState , context)
             return when (gameTurnState) {
                 GameTurnState.PLAYER_BOTTOM -> color
-                else -> context.getDrawable(R.color.colorDark)
+                else -> context.getDrawable(R.color.transparent)
             }
 
     }
