@@ -1,4 +1,4 @@
-package com.example.chesstimer.timer
+package com.example.chesstimer.features.timer
 
 
 import android.os.CountDownTimer

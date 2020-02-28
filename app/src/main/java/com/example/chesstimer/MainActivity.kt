@@ -2,7 +2,7 @@ package com.example.chesstimer
 
 import android.os.Bundle
 import com.example.chesstimer.basic.BaseActivity
-import com.example.chesstimer.module.NavModule
+import com.example.chesstimer.daggerModule.NavModule
 
 
 class MainActivity : BaseActivity() {

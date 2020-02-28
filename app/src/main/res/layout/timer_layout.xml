@@ -6,7 +6,7 @@
         <import type="com.example.chesstimer.common.TimerUtils"/>
         <variable
             name="viewModel"
-            type="com.example.chesstimer.timer.TimerViewModel" />
+            type="com.example.chesstimer.features.timer.TimerViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -18,7 +18,7 @@
         
         <LinearLayout
             android:rotation="180"
-            android:background="@{viewModel.timerDataModel.getInvertPrimaryTopBtnColor(context)}"
+            android:background="@{viewModel.timerStateObserver.getInvertPrimaryTopBtnColor(context)}"
             android:onClick="@{viewModel::onTopButtonClicked}"
             android:id="@+id/top_timer_button"
             android:layout_width="match_parent"
@@ -29,7 +29,7 @@
 
             <TextView
                 android:id="@+id/top_primary_timer"
-                android:textColor="@{viewModel.timerDataModel.getTopTextColor(context)}"
+                android:textColor="@{viewModel.timerStateObserver.getTopTextColor(context)}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="5:00"
@@ -37,8 +37,8 @@
         </LinearLayout>
         <TextView
             android:id="@+id/top_secondary_timer"
-            android:textColor="@{viewModel.timerDataModel.getTopTextColor(context)}"
-            android:background="@{viewModel.timerDataModel.getInvertSecondaryTopBtnColor(context)}"
+            android:textColor="@{viewModel.timerStateObserver.getTopTextColor(context)}"
+            android:background="@{viewModel.timerStateObserver.getInvertSecondaryTopBtnColor(context)}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingTop="4sp"
@@ -78,6 +78,7 @@
                 android:textColor="@color/colorPrimary"
                />
             <ImageView
+                android:onClick="@{viewModel::onSettingsClicked}"
                 android:layout_gravity="end"
                 android:src="@drawable/ic_settings"
                 android:id="@+id/start_timer"
@@ -85,8 +86,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="40sp"
-                android:textColor="@color/colorPrimary"
-                android:text="X"/>
+                android:textColor="@color/colorPrimary" />
         </FrameLayout>
         <TextView
             android:id="@+id/bottom_secondary_timer"
@@ -97,8 +97,8 @@
             android:paddingStart="8sp"
             android:paddingEnd="8sp"
             tools:text="5:00"
-            android:textColor="@{viewModel.timerDataModel.getBottomTextColor(context)}"
-            android:background="@{viewModel.timerDataModel.getInvertSecondaryBottomBtnColor(context)}"
+            android:textColor="@{viewModel.timerStateObserver.getBottomTextColor(context)}"
+            android:background="@{viewModel.timerStateObserver.getInvertSecondaryBottomBtnColor(context)}"
             app:layout_constraintBottom_toTopOf="@id/bottom_timer_button"
             app:layout_constraintStart_toStartOf="parent"/>
 
@@ -109,7 +109,7 @@
             android:gravity="center"
             android:orientation="horizontal"
             android:onClick="@{viewModel::onBottomButtonClicked}"
-            android:background="@{viewModel.timerDataModel.getInvertPrimaryBottomBtnColor(context)}"
+            android:background="@{viewModel.timerStateObserver.getInvertPrimaryBottomBtnColor(context)}"
             app:layout_constraintBottom_toBottomOf="parent">
 
             <TextView
@@ -118,7 +118,7 @@
                 android:layout_height="wrap_content"
                 tools:text="5:00"
                 android:textSize="130sp"
-                android:textColor="@{viewModel.timerDataModel.getBottomTextColor(context)}" />
+                android:textColor="@{viewModel.timerStateObserver.getBottomTextColor(context)}" />
 
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

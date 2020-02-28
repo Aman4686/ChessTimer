@@ -3,17 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:padding="10dp">
     <LinearLayout
-        android:id="@+id/setting_top_frame"
+        android:id="@+id/setting_item_top_frame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-        <CheckBox
-            android:id="@+id/setting_item_checkBox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
         <EditText
             android:id="@+id/setting_item_title"
             android:layout_width="wrap_content"
@@ -24,12 +21,18 @@
         android:id="@+id/setting_bottom_frame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/setting_top_frame"
+        app:layout_constraintTop_toBottomOf="@id/setting_item_top_frame"
         app:layout_constraintStart_toStartOf="parent">
         <TextView
             android:textSize="20sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Time:"/>
+        <EditText
+            android:id="@+id/setting_item_time"
+            android:textSize="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="20"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

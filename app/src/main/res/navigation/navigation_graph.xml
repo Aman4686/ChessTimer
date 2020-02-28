@@ -5,6 +5,34 @@
 
     <fragment
         android:id="@+id/timerFragment"
-        android:name="com.example.chesstimer.timer.TimerFragment"
-        android:label="TimerFragment" />
+        android:name="com.example.chesstimer.features.timer.TimerFragment"
+        android:label="TimerFragment" >
+
+        <action
+            android:id="@+id/action_timerFragment_to_settingFragment"
+            app:destination="@id/settingFragment"
+
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+
+            app:popEnterAnim="@anim/slide_pop_in_left"
+            app:popExitAnim="@anim/slide_pop_out_right"
+            app:popUpTo="@+id/timerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingFragment"
+        android:name="com.example.chesstimer.features.settings.SettingFragment"
+        android:label="SettingFragment" >
+        <action
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_pop_in_left"
+            app:popExitAnim="@anim/slide_pop_out_right"
+            android:id="@+id/action_settingFragment_to_creatorFragment"
+            app:destination="@id/creatorFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/creatorFragment"
+        android:name="com.example.chesstimer.features.creator.CreatorFragment"
+        android:label="CreatorFragment" />
 </navigation>

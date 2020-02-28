@@ -1,4 +1,4 @@
-package com.example.chesstimer.timer
+package com.example.chesstimer.features.timer
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -13,13 +13,13 @@ import androidx.lifecycle.Observer
 import com.example.chesstimer.R
 import com.example.chesstimer.basic.BaseView
 import com.example.chesstimer.common.states.TimerState
-import com.example.chesstimer.databinding.TimerMainBinding
+import com.example.chesstimer.databinding.TimerLayoutBinding
 
 
 class TimerView(@NonNull inflater: LayoutInflater, @NonNull lifecycleOwner: LifecycleOwner,
                  @Nullable container: ViewGroup , @NonNull val model: TimerViewModel) : BaseView() {
 
-    private var gameTime = model.timerDataModel.value?.maxTimeCountMillis?:10000L
+    private var gameTime = model.time.value?:10000L
 
     private lateinit var bottomPrimaryTimer : TextView
     private lateinit var topPrimaryTimer : TextView
@@ -29,12 +29,12 @@ class TimerView(@NonNull inflater: LayoutInflater, @NonNull lifecycleOwner: Life
     private val context : Context
 
     init {
-        val mDataBinding : TimerMainBinding = DataBindingUtil.inflate(inflater, R.layout.timer_main, container, false)
+        val mDataBinding : TimerLayoutBinding = DataBindingUtil.inflate(inflater, R.layout.timer_layout, container, false)
         mDataBinding.lifecycleOwner = lifecycleOwner
         mDataBinding.executePendingBindings()
         mDataBinding.viewModel = model
-
         viewLayout = mDataBinding.root
+
         context = mDataBinding.root.context
         initIds()
         val timer = CountDownTimers(
@@ -43,7 +43,7 @@ class TimerView(@NonNull inflater: LayoutInflater, @NonNull lifecycleOwner: Life
             model)
 
 
-        model.timerDataModel.observe(lifecycleOwner, Observer {
+        model.timerStateObserver.observe(lifecycleOwner, Observer {
 
             if(it.timerState == TimerState.PAUSED)
                 timer.pausedTimers()

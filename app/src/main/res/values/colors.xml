@@ -6,7 +6,8 @@
     <color name="colorDarkBackground">#242424</color>
     <color name="colorDark">#272727</color>
     
-    <color name="colorWhite">#ADADAD</color>
+    <color name="colorGray">#ADADAD</color>
+    <color name="colorWhite">#EBEBEB</color>
     <color name="touchEffect">#11FFFFFF</color>
 
     <color name="transparent">#00000000</color>

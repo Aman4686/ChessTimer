@@ -1,4 +1,4 @@
-package com.example.chesstimer.module
+package com.example.chesstimer.daggerModule
 
 import androidx.appcompat.app.AppCompatActivity
 import com.example.chesstimer.common.navigation.TimerNavigation
