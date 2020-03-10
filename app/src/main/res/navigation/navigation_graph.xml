@@ -24,12 +24,13 @@
         android:name="com.example.chesstimer.features.settings.SettingFragment"
         android:label="SettingFragment" >
         <action
+            android:id="@+id/action_settingFragment_to_creatorFragment"
+            app:destination="@id/creatorFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_pop_in_left"
             app:popExitAnim="@anim/slide_pop_out_right"
-            android:id="@+id/action_settingFragment_to_creatorFragment"
-            app:destination="@id/creatorFragment" />
+            app:popUpTo="@+id/settingFragment" />
     </fragment>
     <fragment
         android:id="@+id/creatorFragment"

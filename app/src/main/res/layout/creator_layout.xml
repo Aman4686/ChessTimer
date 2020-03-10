@@ -37,10 +37,10 @@
                     android:textColor="@color/colorWhite"
                     android:textSize="30dp" />
                 <EditText
+                    android:id="@+id/ed_title_creator"
                     android:textSize="20sp"
-                    android:textColorHint="@color/colorWhite"
+                    android:textColor="@color/colorWhite"
                     android:backgroundTint="@color/colorWhite"
-                    android:hint="ДАДАЯ"
                     android:layout_width="300dp"
                     android:layout_height="wrap_content">
 
@@ -60,17 +60,18 @@
                     android:textColor="@color/colorWhite"
                     android:textSize="30dp" />
                 <EditText
+                    android:id="@+id/ed_time_creator"
+                    android:text="60"
                     android:textSize="20sp"
-                    android:textColorHint="@color/colorWhite"
+                    android:textColor="@color/colorWhite"
                     android:backgroundTint="@color/colorWhite"
-                    android:hint="5"
                     android:layout_width="50sp"
                     android:layout_height="wrap_content" />
             </LinearLayout>
         </LinearLayout>
 
         <Button
-            android:id="@+id/creator_save"
+            android:id="@+id/btn_save_creator"
             android:layout_margin="40dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

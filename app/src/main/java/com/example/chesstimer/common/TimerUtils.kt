@@ -8,6 +8,7 @@ object TimerUtils {
     fun secondsToMillis(second: Int) = (second * 1000).toLong()
     fun millisToMinutes(millis: Long) = (millis / 1000 / 60).toInt()
 
+
     fun getTimeLeftFormatted(timeLeft: Long) : String {
         val minutes : Int = millisToMinutes(timeLeft)
         val seconds : Int = millisToSeconds(timeLeft)

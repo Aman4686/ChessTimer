@@ -23,7 +23,7 @@ class TimerViewModel : ViewModel() {
     }
 
     val timerStateObserver = MutableLiveData(TimerStateObserver())
-    val time = MutableLiveData(1000L)
+    val time = MutableLiveData(1000000L)
 
     fun onTopButtonClicked(v : View) {
         val timer = timerStateObserver.value
@@ -53,7 +53,7 @@ class TimerViewModel : ViewModel() {
 
     fun onPausedTimerClicked(v : View){
         val timer = timerStateObserver.value
-        if (timer != null) {
+        if (timer != null && timer.timerState != TimerState.FINISHED) {
             timer.timerState = TimerState.PAUSED
             timer.gameTurnState = GameTurnState.NO_ONE
             timerStateObserver.value = timer
