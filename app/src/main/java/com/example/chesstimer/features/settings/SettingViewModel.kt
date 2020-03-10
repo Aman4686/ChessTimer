@@ -8,6 +8,7 @@ import com.example.chesstimer.MainActivity
 import com.example.chesstimer.common.navigation.TimerNavigator
 import com.example.chesstimer.data.SettingData
 import com.example.chesstimer.dataBase.DataBaseRepo
+import io.reactivex.disposables.Disposable
 import io.reactivex.rxkotlin.subscribeBy
 
 import javax.inject.Inject
@@ -20,6 +21,7 @@ class SettingViewModel : ViewModel(){
     lateinit var data : DataBaseRepo
 
     val settingListModel = MutableLiveData<List<SettingData>>()
+    val adapter = SettingRecyclerAdapter()
 
     init {
         MainActivity.appComponent.inject(this)
@@ -27,9 +29,10 @@ class SettingViewModel : ViewModel(){
     }
 
     fun initList() {
-        Log.d("MeTag" , "kk")
-        data.getAll().subscribeBy {
-            settingListModel.value = it
+       data.getAll().subscribeBy {
+            settingListModel.value = it.map {
+                SettingData(it)
+            }
         }
 
 

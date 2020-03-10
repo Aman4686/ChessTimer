@@ -30,15 +30,10 @@ class SettingView(@NonNull inflater: LayoutInflater, @NonNull lifecycleOwner: Li
         viewLayout = mDataBinding.root
        val context : Context = viewLayout.context
         initIds()
-        val adapter = SettingRecyclerAdapter()
+        val adapter = model.adapter
 
         settingRecycler.layoutManager = LinearLayoutManager(context)
         settingRecycler.adapter = adapter
-
-        model.settingListModel.observe(lifecycleOwner, Observer {
-            adapter.initSettingList(it)
-        })
-
 
     }
     private fun initIds() {
