@@ -25,30 +25,7 @@ class SettingRecyclerAdapter : RecyclerView.Adapter<SettingRecyclerAdapter.ViewH
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentItem = settingsList[position]
-        val time = TimerUtils.getTimeLeftFormatted(currentItem.time)
-
-        holder.time.text = time
-        holder.id.text = currentItem.id.toString()
-        holder.title.text = currentItem.title
-
-        if (checkedPosition == -1) {
-            holder.id.visibility = View.GONE;
-        } else {
-            if (checkedPosition == holder.adapterPosition) {
-                holder.id.visibility = View.VISIBLE;
-            } else {
-                holder.id.visibility = View.GONE;
-            }
-        }
-
-        holder.item.setOnClickListener {
-            holder.id.visibility = View.VISIBLE
-            if (checkedPosition != holder.adapterPosition) {
-                notifyItemChanged(checkedPosition)
-                checkedPosition = holder.adapterPosition
-            }
-        }
-
+        holder.bind(currentItem)
     }
 
     fun initSettingList(data: List<SettingData>) {
@@ -57,12 +34,39 @@ class SettingRecyclerAdapter : RecyclerView.Adapter<SettingRecyclerAdapter.ViewH
         notifyDataSetChanged()
     }
 
-    class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
+    fun getSelectedItemId() : Int = settingsList[checkedPosition].id
+
+    inner class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
         val time = itemView.tv_time_settingItem
         val title = itemView.setting_item_title
         val id = itemView.tv_id_settingItem
-        val item = itemView.cl_frame_settingItem
+        val itemFrame = itemView.cl_frame_settingItem
+
+        fun bind(item : SettingData){
+            val timeFormatted = TimerUtils.getTimeLeftFormatted(item.time)
+
+            time.text = timeFormatted
+            id.text = item.id.toString()
+            title.text = item.title
+
+                if (checkedPosition == adapterPosition) {
+                    id.visibility = View.VISIBLE
+                } else {
+                    id.visibility = View.GONE
+                }
+
+
+            itemFrame.setOnClickListener {
+               id.visibility = View.VISIBLE
+                if (checkedPosition != adapterPosition) {
+                    notifyItemChanged(checkedPosition)
+                    checkedPosition = adapterPosition
+                }
+            }
+        }
     }
+
+
 
 
 

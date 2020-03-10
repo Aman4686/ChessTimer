@@ -1,5 +1,6 @@
 package com.example.chesstimer.daggerModule
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import com.example.chesstimer.common.navigation.TimerNavigation
 import com.example.chesstimer.common.navigation.TimerNavigator
@@ -11,7 +12,7 @@ class NavModule(private val activity: AppCompatActivity) {
 
     @Provides
     fun provideAppCompatActivity() : AppCompatActivity{
-        return this.activity
+        return activity
     }
 
     @Provides

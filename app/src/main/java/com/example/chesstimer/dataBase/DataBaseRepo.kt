@@ -11,13 +11,20 @@ import kotlin.math.log
 
 class DataBaseRepo {
 
-    fun getAll() : Flowable<List<SettingEntity>> {
-        return App.db.settingDAO().getAll()
-            .observeOn(AndroidSchedulers.mainThread())
+    fun getAll() : Flowable<List<SettingData>> {
+        return App.db.settingDAO().getAll().flatMap {
+            val list = it.map {
+                SettingData(it)
+            }
+            Flowable.just(list)
+        }.observeOn(AndroidSchedulers.mainThread())
     }
 
-    fun getSettingById(id : Int) : Single<SettingEntity> {
+    fun getSettingById(id : Int) : Single<SettingData> {
         return App.db.settingDAO().getSettingById(id)
+            .flatMap {
+                Single.just(SettingData(it))
+            }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }

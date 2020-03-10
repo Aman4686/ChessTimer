@@ -8,9 +8,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.chesstimer.MainActivity
 import com.example.chesstimer.R
+import com.example.chesstimer.common.PrefUtils
 import com.example.chesstimer.common.navigation.TimerNavigator
 import com.example.chesstimer.common.states.GameTurnState
 import com.example.chesstimer.common.states.TimerState
+import com.example.chesstimer.dataBase.DataBaseRepo
+import com.example.chesstimer.dataBase.SettingEntity
+import io.reactivex.rxkotlin.subscribeBy
 import javax.inject.Inject
 
 class TimerViewModel : ViewModel() {
@@ -18,12 +22,27 @@ class TimerViewModel : ViewModel() {
     @Inject
     lateinit var navigator : TimerNavigator
 
-    init {
-        MainActivity.appComponent.inject(this)
-    }
+    @Inject
+    lateinit var data : DataBaseRepo
 
     val timerStateObserver = MutableLiveData(TimerStateObserver())
-    val time = MutableLiveData(1000000L)
+    val time = MutableLiveData<Long>()
+
+    init {
+        MainActivity.appComponent.inject(this)
+        initTime()
+    }
+
+    fun initTime(){
+        val id = PrefUtils.getGameConfig()
+        data.getSettingById(id).subscribeBy ({
+            data.insert(SettingEntity("My First Game" , 60000))
+        },{
+            time.value = it.time
+        })
+    }
+
+
 
     fun onTopButtonClicked(v : View) {
         val timer = timerStateObserver.value

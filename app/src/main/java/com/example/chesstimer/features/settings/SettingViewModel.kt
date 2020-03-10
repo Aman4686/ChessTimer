@@ -5,6 +5,7 @@ import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.chesstimer.MainActivity
+import com.example.chesstimer.common.PrefUtils
 import com.example.chesstimer.common.navigation.TimerNavigator
 import com.example.chesstimer.data.SettingData
 import com.example.chesstimer.dataBase.DataBaseRepo
@@ -30,15 +31,12 @@ class SettingViewModel : ViewModel(){
 
     fun initList() {
        data.getAll().subscribeBy {
-            settingListModel.value = it.map {
-                SettingData(it)
-            }
+            settingListModel.value = it
         }
-
-
     }
 
-    fun onBackClicked(v : View){
+    fun onStartClicked(v : View){
+        PrefUtils.addGameConfig(adapter.getSelectedItemId())
         navigator.navigateBack()
     }
 
