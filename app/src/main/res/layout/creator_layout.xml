@@ -25,7 +25,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
-                android:id="@+id/title"
+                android:id="@+id/ll_title_creator"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@color/colorDarkBackground">
@@ -33,7 +33,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Title:"
+                    android:text="@string/title_creator"
                     android:textColor="@color/colorWhite"
                     android:textSize="30dp" />
                 <EditText
@@ -48,7 +48,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/time"
+                android:id="@+id/et_time_creator"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@color/colorDarkBackground">
@@ -56,7 +56,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Time:"
+                    android:text="@string/time_creator"
                     android:textColor="@color/colorWhite"
                     android:textSize="30dp" />
                 <EditText
@@ -68,14 +68,38 @@
                     android:layout_width="50sp"
                     android:layout_height="wrap_content" />
             </LinearLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/title_creator"
+                android:textColorHint="@color/colorWhite">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:maxLines="1"
+                    android:inputType="text"
+                    android:textColor="@color/colorWhite"
+                    android:backgroundTint="@color/colorWhite"/>
+            </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 
-        <Button
+        <TextView
+            android:focusable="true"
+            android:clickable="true"
             android:id="@+id/btn_save_creator"
-            android:layout_margin="40dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="40dp"
+            android:background="@color/gradientPartOne"
+            android:paddingStart="90dp"
+            android:paddingTop="5dp"
+            android:paddingEnd="90dp"
+            android:paddingBottom="5dp"
             android:text="save"
+            android:textSize="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 

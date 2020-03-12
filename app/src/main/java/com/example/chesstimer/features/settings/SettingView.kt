@@ -28,7 +28,7 @@ class SettingView(@NonNull inflater: LayoutInflater, @NonNull lifecycleOwner: Li
         mDataBinding.executePendingBindings()
         mDataBinding.viewModel = model
         viewLayout = mDataBinding.root
-       val context : Context = viewLayout.context
+        val context : Context = viewLayout.context
         initIds()
         val adapter = model.adapter
 

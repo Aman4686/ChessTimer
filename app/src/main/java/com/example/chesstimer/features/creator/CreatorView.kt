@@ -17,7 +17,7 @@ import com.example.chesstimer.databinding.CreatorLayoutBinding
 class CreatorView(@NonNull inflater: LayoutInflater, @NonNull lifecycleOwner: LifecycleOwner,
                   @Nullable container: ViewGroup, @NonNull val model: CreatorViewModel) : BaseView() {
 
-    lateinit var save : Button
+    lateinit var save : TextView
     lateinit var itemTitle : EditText
     lateinit var itemTime : EditText
 
@@ -28,6 +28,8 @@ class CreatorView(@NonNull inflater: LayoutInflater, @NonNull lifecycleOwner: Li
         mDataBinding.viewModel = model
         viewLayout = mDataBinding.root
         initIds()
+
+        
 
         save.setOnClickListener{
             val title = itemTitle.text.toString()

@@ -19,8 +19,6 @@ import com.example.chesstimer.databinding.TimerLayoutBinding
 class TimerView(@NonNull inflater: LayoutInflater, @NonNull lifecycleOwner: LifecycleOwner,
                  @Nullable container: ViewGroup , @NonNull val model: TimerViewModel) : BaseView() {
 
-    private var gameTime = model.time.value?:10000L
-
     private lateinit var bottomPrimaryTimer : TextView
     private lateinit var topPrimaryTimer : TextView
     private lateinit var bottomSecondaryTimer : TextView
@@ -37,12 +35,13 @@ class TimerView(@NonNull inflater: LayoutInflater, @NonNull lifecycleOwner: Life
 
         context = mDataBinding.root.context
         initIds()
+
         val timer = CountDownTimers(
-            gameTime, bottomPrimaryTimer, topPrimaryTimer,
+            bottomPrimaryTimer, topPrimaryTimer,
             bottomSecondaryTimer, topSecondaryTimer,
             model)
 
-
+        model.initTime(timer)
         model.timerStateObserver.observe(lifecycleOwner, Observer {
 
             if(it.timerState == TimerState.PAUSED)
@@ -52,7 +51,7 @@ class TimerView(@NonNull inflater: LayoutInflater, @NonNull lifecycleOwner: Life
                 timer.startTimer(it.gameTurnState)
 
             if(it.timerState == TimerState.RESETED)
-                timer.resetTimers()
+                timer.refreshTimers()
 
         })
     }

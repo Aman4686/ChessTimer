@@ -26,6 +26,7 @@ class SettingViewModel : ViewModel(){
 
     init {
         MainActivity.appComponent.inject(this)
+        adapter.checkedPosition = PrefUtils.getGameConfig()
         initList()
     }
 
@@ -36,7 +37,8 @@ class SettingViewModel : ViewModel(){
     }
 
     fun onStartClicked(v : View){
-        PrefUtils.addGameConfig(adapter.getSelectedItemId())
+        val id = adapter.getSelectedItemId()
+        PrefUtils.addGameConfig(id)
         navigator.navigateBack()
     }
 

@@ -6,6 +6,6 @@ import androidx.room.PrimaryKey
 class SettingEntity(var title : String , var time : Long) {
 
     @PrimaryKey(autoGenerate = true)
-    var id: Int = 0
+    var id: Int? = null
 
 }

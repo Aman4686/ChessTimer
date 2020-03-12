@@ -26,23 +26,22 @@ class TimerViewModel : ViewModel() {
     lateinit var data : DataBaseRepo
 
     val timerStateObserver = MutableLiveData(TimerStateObserver())
-    val time = MutableLiveData<Long>()
 
     init {
         MainActivity.appComponent.inject(this)
-        initTime()
     }
 
-    fun initTime(){
+    fun initTime(timer: CountDownTimers){
         val id = PrefUtils.getGameConfig()
         data.getSettingById(id).subscribeBy ({
-            data.insert(SettingEntity("My First Game" , 60000))
+            data.insert(SettingEntity("fsdfs" , 120000))
+            timer.gameTime = 120000
+            timer.refreshTimers()
         },{
-            time.value = it.time
+            timer.gameTime = it.time
+            timer.refreshTimers()
         })
     }
-
-
 
     fun onTopButtonClicked(v : View) {
         val timer = timerStateObserver.value

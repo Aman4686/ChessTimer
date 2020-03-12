@@ -9,7 +9,7 @@ class SettingData {
     val time : Long
 
     constructor(settingEntity: SettingEntity){
-        this.id = settingEntity.id
+        this.id = settingEntity.id?:0
         this.title = settingEntity.title
         this.time = settingEntity.time
     }

@@ -9,7 +9,6 @@ object PrefUtils {
 
     private lateinit var sPref : SharedPreferences
     private lateinit var editor: Editor
-    private lateinit var context: Context
 
     fun init(context: Context){
         sPref = context.getSharedPreferences("MY_STORAGE" , MODE_PRIVATE)

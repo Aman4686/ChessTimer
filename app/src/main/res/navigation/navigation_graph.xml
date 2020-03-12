@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/navigation_graph"
-    app:startDestination="@id/timerFragment">
+    app:startDestination="@id/creatorFragment">
 
     <fragment
         android:id="@+id/timerFragment"
@@ -14,9 +14,9 @@
 
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
-
             app:popEnterAnim="@anim/slide_pop_in_left"
             app:popExitAnim="@anim/slide_pop_out_right"
+
             app:popUpTo="@+id/timerFragment" />
     </fragment>
     <fragment
@@ -26,6 +26,7 @@
         <action
             android:id="@+id/action_settingFragment_to_creatorFragment"
             app:destination="@id/creatorFragment"
+
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_pop_in_left"

@@ -1,5 +1,6 @@
 package com.example.chesstimer.features.settings
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,7 +35,10 @@ class SettingRecyclerAdapter : RecyclerView.Adapter<SettingRecyclerAdapter.ViewH
         notifyDataSetChanged()
     }
 
-    fun getSelectedItemId() : Int = settingsList[checkedPosition].id
+    fun getSelectedItemId() : Int {
+        return checkedPosition
+    }
+
 
     inner class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
         val time = itemView.tv_time_settingItem
