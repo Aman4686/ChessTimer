@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.annotation.NonNull
 import androidx.annotation.Nullable
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.LifecycleOwner
 import com.example.chesstimer.R
 import com.example.chesstimer.basic.BaseView
@@ -15,11 +16,11 @@ import com.example.chesstimer.common.TimerUtils
 import com.example.chesstimer.databinding.CreatorLayoutBinding
 
 class CreatorView(@NonNull inflater: LayoutInflater, @NonNull lifecycleOwner: LifecycleOwner,
-                  @Nullable container: ViewGroup, @NonNull val model: CreatorViewModel) : BaseView() {
+                  @Nullable container: ViewGroup, @NonNull val model: CreatorViewModel , val fragment: FragmentManager?) : BaseView() {
 
     lateinit var save : TextView
     lateinit var itemTitle : EditText
-    lateinit var itemTime : EditText
+    lateinit var itemTime : Button
 
     init {
         val mDataBinding : CreatorLayoutBinding = DataBindingUtil.inflate(inflater, R.layout.creator_layout, container, false)
@@ -28,14 +29,20 @@ class CreatorView(@NonNull inflater: LayoutInflater, @NonNull lifecycleOwner: Li
         mDataBinding.viewModel = model
         viewLayout = mDataBinding.root
         initIds()
+        val timePickerDialog = TimePickerDialog()
 
-        
-
-        save.setOnClickListener{
-            val title = itemTitle.text.toString()
-            val minutes = itemTime.text.toString().toInt()
-            model.onSaveCliked(title , TimerUtils.secondsToMillis(minutes))
+        itemTime.setOnClickListener{
+            if(fragment != null)
+            timePickerDialog.show(fragment , "SimpleDialod")
         }
+
+
+
+//        save.setOnClickListener{
+//            val title = itemTitle.text.toString()
+//            val minutes = itemTime.text.toString().toInt()
+//            model.onSaveCliked(title , TimerUtils.secondsToMillis(minutes))
+//        }
     }
 
     private fun initIds() {

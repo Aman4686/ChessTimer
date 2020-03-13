@@ -59,13 +59,14 @@
                     android:text="@string/time_creator"
                     android:textColor="@color/colorWhite"
                     android:textSize="30dp" />
-                <EditText
+                <TextView
+                    android:layout_marginStart="5dp"
                     android:id="@+id/ed_time_creator"
-                    android:text="60"
-                    android:textSize="20sp"
+                    android:text="00:00:00"
+                    android:textSize="25sp"
                     android:textColor="@color/colorWhite"
                     android:backgroundTint="@color/colorWhite"
-                    android:layout_width="50sp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </LinearLayout>
 

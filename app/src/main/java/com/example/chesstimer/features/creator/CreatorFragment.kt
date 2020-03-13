@@ -15,12 +15,13 @@ class CreatorFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         model = ViewModelProvider(this)[CreatorViewModel::class.java]
+
     }
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        val creatorView = CreatorView(inflater ,this , container!! , model)
+        val creatorView = CreatorView(inflater ,this , container!! , model , fragmentManager)
 
         return creatorView.viewLayout
     }

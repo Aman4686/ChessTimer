@@ -12,8 +12,8 @@ class CreatorViewModel : ViewModel() {
 
     @Inject
     lateinit var navigator : TimerNavigator
-    @Inject
 
+    @Inject
     lateinit var data : DataBaseRepo
 
     init {

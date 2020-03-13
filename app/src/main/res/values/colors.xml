@@ -18,4 +18,8 @@
     <color name="gradientPartTwoFinished">#3B4371</color>
 
 
+<!--    app:enterAnim="@anim/slide_in_right"-->
+<!--    app:exitAnim="@anim/slide_out_left"-->
+<!--    app:popEnterAnim="@anim/slide_pop_in_left"-->
+<!--    app:popExitAnim="@anim/slide_pop_out_right"-->
 </resources>

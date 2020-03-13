@@ -12,5 +12,9 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+    <style name="number_picker">
+        <item name="android:textSize">25sp</item>
+        <item name="android:textColor">@color/colorDark</item>
+    </style>
 
 </resources>
