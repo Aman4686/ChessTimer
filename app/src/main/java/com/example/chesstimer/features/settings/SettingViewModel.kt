@@ -1,15 +1,13 @@
 package com.example.chesstimer.features.settings
 
-import android.util.Log
 import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.chesstimer.MainActivity
 import com.example.chesstimer.common.PrefUtils
 import com.example.chesstimer.common.navigation.TimerNavigator
-import com.example.chesstimer.data.SettingData
 import com.example.chesstimer.dataBase.DataBaseRepo
-import io.reactivex.disposables.Disposable
+import com.example.chesstimer.dataBase.SettingEntity
 import io.reactivex.rxkotlin.subscribeBy
 
 import javax.inject.Inject
@@ -21,7 +19,7 @@ class SettingViewModel : ViewModel(){
     @Inject
     lateinit var data : DataBaseRepo
 
-    val settingListModel = MutableLiveData<List<SettingData>>()
+    val settingListModel = MutableLiveData<List<SettingEntity>>()
     val adapter = SettingRecyclerAdapter()
 
     init {
@@ -31,7 +29,7 @@ class SettingViewModel : ViewModel(){
     }
 
     fun initList() {
-       data.getAll().subscribeBy {
+       data.getAllSetings().subscribeBy {
             settingListModel.value = it
         }
     }

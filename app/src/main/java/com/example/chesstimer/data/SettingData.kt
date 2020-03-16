@@ -14,11 +14,6 @@ class SettingData {
         this.time = settingEntity.time
     }
 
-    constructor(){
-        this.id = 0
-        this.title = "Start game"
-        this.time = 60000
-    }
 
 
 }

@@ -11,30 +11,45 @@ import kotlin.math.log
 
 class DataBaseRepo {
 
-    fun getAll() : Flowable<List<SettingData>> {
-        return App.db.settingDAO().getAll().flatMap {
-            val list = it.map {
-                SettingData(it)
-            }
-            Flowable.just(list)
-        }.observeOn(AndroidSchedulers.mainThread())
+    fun getAllSetings(): Flowable<List<SettingEntity>> {
+        return App.db.settingDAO().getAll()
+            .observeOn(AndroidSchedulers.mainThread())
     }
 
-    fun getSettingById(id : Int) : Single<SettingData> {
+    fun getSettingById(id: Int): Single<SettingEntity> {
         return App.db.settingDAO().getSettingById(id)
-            .flatMap {
-                Single.just(SettingData(it))
-            }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
 
-    fun insert(settingEntity: SettingEntity) {
-         Completable.fromCallable {
+    fun insertSetting(settingEntity: SettingEntity) {
+        Completable.fromCallable {
             App.db.settingDAO().insert(settingEntity)
         }.subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-             .subscribe()
+            .subscribe()
+    }
+
+    fun getTemporary(): Single<TemporaryEntity> {
+        return App.db.temporaryDAO().getTemporary()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+    }
+
+    fun insertTemporary(temporaryEntity: TemporaryEntity) {
+        Completable.fromCallable {
+            App.db.temporaryDAO().insert(temporaryEntity)
+        }.subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe()
+    }
+
+    fun updateTemporary(temporaryEntity: TemporaryEntity) {
+        Completable.fromCallable {
+            App.db.temporaryDAO().update(temporaryEntity)
+        }.subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe()
     }
 
 }

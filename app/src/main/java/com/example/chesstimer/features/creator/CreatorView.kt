@@ -2,7 +2,6 @@ package com.example.chesstimer.features.creator
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.annotation.NonNull
@@ -13,6 +12,9 @@ import androidx.lifecycle.LifecycleOwner
 import com.example.chesstimer.R
 import com.example.chesstimer.basic.BaseView
 import com.example.chesstimer.common.TimerUtils
+import com.example.chesstimer.common.TimerUtils.hoursToMillis
+import com.example.chesstimer.common.TimerUtils.minutesToMillis
+import com.example.chesstimer.common.TimerUtils.secondsToMillis
 import com.example.chesstimer.databinding.CreatorLayoutBinding
 
 class CreatorView(@NonNull inflater: LayoutInflater, @NonNull lifecycleOwner: LifecycleOwner,
@@ -20,7 +22,8 @@ class CreatorView(@NonNull inflater: LayoutInflater, @NonNull lifecycleOwner: Li
 
     lateinit var save : TextView
     lateinit var itemTitle : EditText
-    lateinit var itemTime : Button
+    lateinit var itemTime : TextView
+
 
     init {
         val mDataBinding : CreatorLayoutBinding = DataBindingUtil.inflate(inflater, R.layout.creator_layout, container, false)
@@ -29,20 +32,27 @@ class CreatorView(@NonNull inflater: LayoutInflater, @NonNull lifecycleOwner: Li
         mDataBinding.viewModel = model
         viewLayout = mDataBinding.root
         initIds()
-        val timePickerDialog = TimePickerDialog()
 
-        itemTime.setOnClickListener{
-            if(fragment != null)
-            timePickerDialog.show(fragment , "SimpleDialod")
+
+
+        val timePickerDialog = TimePickerDialog{hour , min , sec->
+            val result = hoursToMillis(hour) + minutesToMillis(min) + secondsToMillis(sec)
+            itemTime.text = TimerUtils.getFormattedTime(result)
         }
 
+        itemTime.setOnClickListener{
+        //    timePickerDialog.loadValue()
+            if(fragment != null)
+            timePickerDialog.show(fragment , "SimpleDialog")
+        }
 
+        save.setOnClickListener {
+            val title = itemTitle.text
 
-//        save.setOnClickListener{
-//            val title = itemTitle.text.toString()
-//            val minutes = itemTime.text.toString().toInt()
-//            model.onSaveCliked(title , TimerUtils.secondsToMillis(minutes))
-//        }
+          //  val time =
+         //   model.onSaveCliked()
+        }
+
     }
 
     private fun initIds() {

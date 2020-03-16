@@ -7,12 +7,12 @@ import android.widget.TextView
 import com.example.chesstimer.common.TimerUtils
 import com.example.chesstimer.common.states.GameTurnState
 
-class CountDownTimers(
-    private val bottomPrimaryTimer : TextView,
-                      private val topPrimaryTimer : TextView,
-                      private val bottomSecondaryTimer : TextView,
-                      private val topSecondaryTimer : TextView,
-                      private val model : TimerViewModel){
+class CountDownTimers(private val model : TimerViewModel){
+
+    private lateinit var bottomPrimaryTimer : TextView
+    private lateinit var topPrimaryTimer : TextView
+    private lateinit var bottomSecondaryTimer : TextView
+    private lateinit var topSecondaryTimer : TextView
 
     var gameTime: Long = 60000
 
@@ -22,9 +22,11 @@ class CountDownTimers(
     private var timerTop : CountDownTimer? = null
     private var timerBottom : CountDownTimer? = null
 
-    init {
-        prepareTimers()
-        updateTimers()
+    fun bind(bottomPrimaryTimer : TextView,topPrimaryTimer : TextView, bottomSecondaryTimer : TextView,topSecondaryTimer : TextView){
+        this.bottomPrimaryTimer = bottomPrimaryTimer
+        this.topPrimaryTimer = topPrimaryTimer
+        this.bottomSecondaryTimer = bottomSecondaryTimer
+        this.topSecondaryTimer = topSecondaryTimer
     }
 
     fun refreshTimers(){
@@ -55,13 +57,13 @@ class CountDownTimers(
     }
 
     private fun updateTopTimer(timeLeft: Long) {
-        val timeLeftFormatted = TimerUtils.getTimeLeftFormatted(timeLeft)
+        val timeLeftFormatted = TimerUtils.getFormattedTime(timeLeft)
         topPrimaryTimer.text = timeLeftFormatted
         bottomSecondaryTimer.text = timeLeftFormatted
     }
 
     private fun updateBottomTimer(timeLeft: Long) {
-        val timeLeftFormatted = TimerUtils.getTimeLeftFormatted(timeLeft)
+        val timeLeftFormatted = TimerUtils.getFormattedTime(timeLeft)
         bottomPrimaryTimer.text = timeLeftFormatted
         topSecondaryTimer.text = timeLeftFormatted
     }
