@@ -4,8 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.chesstimer.basic.BaseFragment
+import com.example.chesstimer.common.states.TimerState
 
 
 class TimerFragment : BaseFragment() {
@@ -15,13 +17,28 @@ class TimerFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         model = ViewModelProvider(this)[TimerViewModel::class.java]
+        model.timerStateObserver.observe(this, Observer {
+
+            if(it.timerState == TimerState.PAUSED)
+                model.timers.pausedTimers()
+
+            if(it.timerState == TimerState.RUNNING)
+                model.timers.startTimer(it.gameTurnState)
+
+            if(it.timerState == TimerState.RESETED)
+                model.timers.refreshTimers()
+
+        })
     }
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-
         val timerView = TimerView(inflater ,this , container!! , model)
-
         return timerView.viewLayout
+    }
+
+    override fun onStop() {
+        super.onStop()
+        model.pausedTimer()
     }
 }

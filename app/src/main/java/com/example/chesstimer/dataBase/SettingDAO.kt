@@ -17,6 +17,4 @@ interface SettingDAO {
     @Insert
     fun insert(settting: SettingEntity)
 
-
-
 }

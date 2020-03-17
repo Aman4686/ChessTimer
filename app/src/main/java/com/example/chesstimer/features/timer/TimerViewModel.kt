@@ -2,6 +2,7 @@ package com.example.chesstimer.features.timer
 
 import android.content.Context
 import android.graphics.drawable.Drawable
+import android.util.Log
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.MutableLiveData
@@ -14,6 +15,7 @@ import com.example.chesstimer.common.states.GameTurnState
 import com.example.chesstimer.common.states.TimerState
 import com.example.chesstimer.dataBase.DataBaseRepo
 import com.example.chesstimer.dataBase.SettingEntity
+import com.example.chesstimer.dataBase.TemporaryEntity
 import io.reactivex.rxkotlin.subscribeBy
 import javax.inject.Inject
 
@@ -26,21 +28,34 @@ class TimerViewModel : ViewModel() {
     lateinit var data : DataBaseRepo
 
     val timerStateObserver = MutableLiveData(TimerStateObserver())
+    val timers = CountDownTimers(this)
 
     init {
         MainActivity.appComponent.inject(this)
     }
 
     fun initTime(timer: CountDownTimers){
-        val id = PrefUtils.getGameConfig()
-        data.getSettingById(id).subscribeBy ({
-            data.insert(SettingEntity("fsdfs" , 120000))
+        data.getTemporary().subscribeBy ({
+            data.insertTemporary(TemporaryEntity("fsdfs" , 120000))
             timer.gameTime = 120000
             timer.refreshTimers()
         },{
             timer.gameTime = it.time
             timer.refreshTimers()
         })
+    }
+
+    fun pausedTimer(){
+        val timer = timerStateObserver.value
+        if(timer != null && timer.timerState != TimerState.FINISHED){
+            timer.timerState = TimerState.PAUSED
+            timer.gameTurnState = GameTurnState.NO_ONE
+            timerStateObserver.value = timer
+        }
+    }
+
+    fun onPausedTimerClicked(v : View){
+        pausedTimer()
     }
 
     fun onTopButtonClicked(v : View) {
@@ -58,7 +73,7 @@ class TimerViewModel : ViewModel() {
 
     fun onBottomButtonClicked(v : View) {
         val timer = timerStateObserver.value
-        if(timer != null) {
+        if (timer != null) {
             val isNotFinished = timer.timerState != TimerState.FINISHED
             val isBottomPlayerTurn = timer.gameTurnState != GameTurnState.PLAYER_TOP
             if (isBottomPlayerTurn && isNotFinished) {
@@ -66,15 +81,6 @@ class TimerViewModel : ViewModel() {
                 timer.gameTurnState = GameTurnState.PLAYER_TOP
                 timerStateObserver.value = timer
             }
-        }
-    }
-
-    fun onPausedTimerClicked(v : View){
-        val timer = timerStateObserver.value
-        if (timer != null && timer.timerState != TimerState.FINISHED) {
-            timer.timerState = TimerState.PAUSED
-            timer.gameTurnState = GameTurnState.NO_ONE
-            timerStateObserver.value = timer
         }
     }
 
@@ -88,7 +94,7 @@ class TimerViewModel : ViewModel() {
     }
 
     fun onSettingsClicked(v : View){
-       navigator.navigateToSettings()
+       navigator.navigateToCreator()
     }
 
     fun gameFinished(){

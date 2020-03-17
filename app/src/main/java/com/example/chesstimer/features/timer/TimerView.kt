@@ -8,11 +8,9 @@ import androidx.annotation.NonNull
 import androidx.annotation.Nullable
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.Observer
 
 import com.example.chesstimer.R
 import com.example.chesstimer.basic.BaseView
-import com.example.chesstimer.common.states.TimerState
 import com.example.chesstimer.databinding.TimerLayoutBinding
 
 
@@ -36,24 +34,11 @@ class TimerView(@NonNull inflater: LayoutInflater, @NonNull lifecycleOwner: Life
         context = mDataBinding.root.context
         initIds()
 
-        val timer = CountDownTimers(
-            bottomPrimaryTimer, topPrimaryTimer,
-            bottomSecondaryTimer, topSecondaryTimer,
-            model)
-
+        val timer = model.timers
+        timer.bind(bottomPrimaryTimer , topPrimaryTimer,
+            bottomSecondaryTimer , topSecondaryTimer)
         model.initTime(timer)
-        model.timerStateObserver.observe(lifecycleOwner, Observer {
 
-            if(it.timerState == TimerState.PAUSED)
-                timer.pausedTimers()
-
-            if(it.timerState == TimerState.RUNNING)
-                timer.startTimer(it.gameTurnState)
-
-            if(it.timerState == TimerState.RESETED)
-                timer.refreshTimers()
-
-        })
     }
 
     private fun initIds() {

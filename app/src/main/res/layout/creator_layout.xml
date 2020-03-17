@@ -37,6 +37,7 @@
                     android:textColor="@color/colorWhite"
                     android:textSize="30dp" />
                 <EditText
+                    android:text="@{viewModel.temporaryLiveData.title}"
                     android:id="@+id/ed_title_creator"
                     android:textSize="20sp"
                     android:textColor="@color/colorWhite"
@@ -62,7 +63,7 @@
                 <TextView
                     android:layout_marginStart="5dp"
                     android:id="@+id/ed_time_creator"
-                    android:text="00:00:00"
+                    android:formattedTime="@{viewModel.temporaryLiveData.time}"
                     android:textSize="25sp"
                     android:textColor="@color/colorWhite"
                     android:backgroundTint="@color/colorWhite"
@@ -87,6 +88,26 @@
         </LinearLayout>
 
         <TextView
+
+            android:id="@+id/btn_back_creator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="40dp"
+            android:background="@color/gradientPartOne"
+            android:clickable="true"
+            android:focusable="true"
+            android:paddingStart="40dp"
+            android:paddingTop="5dp"
+            android:paddingEnd="40dp"
+            android:paddingBottom="5dp"
+            android:text="Back"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btn_save_creator"
+            app:layout_constraintStart_toStartOf="parent" />
+        <TextView
+            android:onClick="@{viewModel::onBackCliked}"
             android:focusable="true"
             android:clickable="true"
             android:id="@+id/btn_save_creator"
@@ -95,9 +116,9 @@
             android:layout_gravity="center"
             android:layout_margin="40dp"
             android:background="@color/gradientPartOne"
-            android:paddingStart="90dp"
+            android:paddingStart="40dp"
             android:paddingTop="5dp"
-            android:paddingEnd="90dp"
+            android:paddingEnd="40dp"
             android:paddingBottom="5dp"
             android:text="save"
             android:textSize="20dp"
