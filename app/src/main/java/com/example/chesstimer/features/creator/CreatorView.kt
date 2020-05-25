@@ -9,12 +9,16 @@ import androidx.annotation.Nullable
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.Observer
+import androidx.lifecycle.observe
 import com.example.chesstimer.R
 import com.example.chesstimer.basic.BaseView
+import com.example.chesstimer.common.Duration
 import com.example.chesstimer.common.TimerUtils
 import com.example.chesstimer.common.TimerUtils.hoursToMillis
 import com.example.chesstimer.common.TimerUtils.minutesToMillis
 import com.example.chesstimer.common.TimerUtils.secondsToMillis
+import com.example.chesstimer.dataBase.TemporaryEntity
 import com.example.chesstimer.databinding.CreatorLayoutBinding
 
 class CreatorView(@NonNull inflater: LayoutInflater, @NonNull lifecycleOwner: LifecycleOwner,
@@ -23,7 +27,8 @@ class CreatorView(@NonNull inflater: LayoutInflater, @NonNull lifecycleOwner: Li
     lateinit var save : TextView
     lateinit var itemTitle : EditText
     lateinit var itemTime : TextView
-
+    lateinit var temporaryEntity : TemporaryEntity
+    lateinit var timePickerDialog : TimePickerDialog
 
     init {
         val mDataBinding : CreatorLayoutBinding = DataBindingUtil.inflate(inflater, R.layout.creator_layout, container, false)
@@ -32,27 +37,27 @@ class CreatorView(@NonNull inflater: LayoutInflater, @NonNull lifecycleOwner: Li
         mDataBinding.viewModel = model
         viewLayout = mDataBinding.root
         initIds()
+        initOnClick()
 
+        model.temporaryLiveData.observe(lifecycleOwner, Observer {
+            temporaryEntity = it
+        })
 
+    }
 
-        val timePickerDialog = TimePickerDialog{hour , min , sec->
-            val result = hoursToMillis(hour) + minutesToMillis(min) + secondsToMillis(sec)
-            itemTime.text = TimerUtils.getFormattedTime(result)
-        }
-
+    private fun initOnClick() {
         itemTime.setOnClickListener{
-        //    timePickerDialog.loadValue()
-            if(fragment != null)
-            timePickerDialog.show(fragment , "SimpleDialog")
+            if(fragment != null) {
+                timePickerDialog = initTimePickerDialog(Duration(temporaryEntity.timeDuration))
+                timePickerDialog.show(fragment, "SimpleDialog")
+            }
         }
 
         save.setOnClickListener {
-            val title = itemTitle.text
-
-          //  val time =
-         //   model.onSaveCliked()
+            val title = itemTitle.text.toString()
+            val time = temporaryEntity.timeDuration
+            model.onSaveCliked(title , time)
         }
-
     }
 
     private fun initIds() {
@@ -61,5 +66,17 @@ class CreatorView(@NonNull inflater: LayoutInflater, @NonNull lifecycleOwner: Li
         itemTime = viewLayout.findViewById(R.id.ed_time_creator)
     }
 
+    private fun initTimePickerDialog(duration : Duration) : TimePickerDialog{
+
+       return TimePickerDialog(duration){hour , min , sec->
+           val result = hoursToMillis(hour) + minutesToMillis(min) + secondsToMillis(sec)
+
+           temporaryEntity.timeDuration = result
+           model.temporaryLiveData.value = temporaryEntity
+
+           itemTime.text = TimerUtils.getFormattedTime(result)
+        }
+
+    }
 
 }

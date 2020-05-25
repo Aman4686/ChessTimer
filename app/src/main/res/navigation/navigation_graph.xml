@@ -18,7 +18,7 @@
     </fragment>
     <fragment
         android:id="@+id/settingFragment"
-        android:name="com.example.chesstimer.features.settings.SettingFragment"
+        android:name="com.example.chesstimer.features.settings.SettingsListFragment"
         android:label="SettingFragment" />
     <fragment
         android:id="@+id/creatorFragment"

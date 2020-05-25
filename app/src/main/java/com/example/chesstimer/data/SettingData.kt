@@ -11,7 +11,7 @@ class SettingData {
     constructor(settingEntity: SettingEntity){
         this.id = settingEntity.id?:0
         this.title = settingEntity.title
-        this.time = settingEntity.time
+        this.time = settingEntity.timeDuration
     }
 
 

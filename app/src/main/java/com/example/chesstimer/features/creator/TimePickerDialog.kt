@@ -1,8 +1,7 @@
 package com.example.chesstimer.features.creator
 
-import android.content.Context
+
 import android.os.Bundle
-import android.util.TimeUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,24 +9,20 @@ import android.widget.NumberPicker
 import android.widget.TextView
 import androidx.fragment.app.DialogFragment
 import com.example.chesstimer.R
-import com.example.chesstimer.common.TimerUtils
-import org.w3c.dom.Text
+import com.example.chesstimer.common.Duration
+
 import java.lang.String
-import java.sql.Time
-import java.text.DecimalFormat
-import java.text.NumberFormat
-import java.text.SimpleDateFormat
+
 import java.util.*
 
 
-class TimePickerDialog(private val listener : (hours : Int , minutes : Int , seconds : Int) -> Unit) : DialogFragment() {
+class TimePickerDialog(private val time : Duration,
+                       private val listener : (hours : Int, minutes : Int, seconds : Int) -> Unit) : DialogFragment() {
 
     lateinit var npHours : NumberPicker
     lateinit var npMinutes : NumberPicker
     lateinit var npSeconds : NumberPicker
     lateinit var btnOk : TextView
-
-
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.time_picker_layout ,container, false)
@@ -41,6 +36,8 @@ class TimePickerDialog(private val listener : (hours : Int , minutes : Int , sec
 
         npSeconds.maxValue = 59
         npSeconds.minValue = 0
+
+        loadValue(time.hours , time.minutes , time.seconds)
 
         val formatter = NumberPicker.Formatter {
            String.format( Locale.US,"%02d", it )

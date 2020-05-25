@@ -7,7 +7,6 @@ import androidx.annotation.NonNull
 import androidx.annotation.Nullable
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.chesstimer.R
@@ -15,8 +14,8 @@ import com.example.chesstimer.basic.BaseView
 import com.example.chesstimer.databinding.SettingLayoutBinding
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-class SettingView(@NonNull inflater: LayoutInflater, @NonNull lifecycleOwner: LifecycleOwner,
-                  @Nullable container: ViewGroup, @NonNull val model: SettingViewModel) : BaseView() {
+class SettingsListView(@NonNull inflater: LayoutInflater, @NonNull lifecycleOwner: LifecycleOwner,
+                       @Nullable container: ViewGroup, @NonNull val model: SettingsListViewModel) : BaseView() {
 
 
     lateinit var createNewSettings : FloatingActionButton

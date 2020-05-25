@@ -2,6 +2,7 @@ package com.example.chesstimer.dataBase
 
 import android.util.Log
 import com.example.chesstimer.App
+import com.example.chesstimer.common.LogUtils
 import com.example.chesstimer.data.SettingData
 import io.reactivex.*
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -36,6 +37,11 @@ class DataBaseRepo {
             .observeOn(AndroidSchedulers.mainThread())
     }
 
+    fun getAllTemporary(): Observable<List<TemporaryEntity>> {
+        return App.db.temporaryDAO().getAllTemporary()
+            .observeOn(AndroidSchedulers.mainThread())
+    }
+
     fun insertTemporary(temporaryEntity: TemporaryEntity) {
         Completable.fromCallable {
             App.db.temporaryDAO().insert(temporaryEntity)
@@ -45,9 +51,14 @@ class DataBaseRepo {
     }
 
     fun updateTemporary(temporaryEntity: TemporaryEntity) {
-        Completable.fromCallable {
+        Completable.fromAction{
             App.db.temporaryDAO().update(temporaryEntity)
-        }.subscribeOn(Schedulers.io())
+            LogUtils.d("lolololo" , "updateTemporary")
+        }
+            .subscribeOn(Schedulers.io())
+            .doOnComplete {
+                LogUtils.d("lolololo" , "updateTemporary")
+            }
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe()
     }

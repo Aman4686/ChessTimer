@@ -6,8 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import com.example.chesstimer.basic.BaseFragment
-import com.example.chesstimer.features.settings.SettingView
-import com.example.chesstimer.features.settings.SettingViewModel
 
 class CreatorFragment : BaseFragment() {
     lateinit var model : CreatorViewModel

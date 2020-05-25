@@ -4,11 +4,9 @@ import java.util.*
 
 object TimerUtils {
 
-    fun millisToSeconds(millis: Long) = (millis / 1000 % 60).toInt()
-    fun millisToMinutes(millis: Long) = (millis / 1000 / 60 % 60).toInt()
-    fun millisToHours(millis: Long) = (millis / 3600000).toInt()
-
-
+    fun millisToSeconds(millis: Long) = ((millis / 1000) % 60).toInt()
+    fun millisToMinutes(millis: Long) = ((millis / (1000 * 60)) % 60).toInt()
+    fun millisToHours(millis: Long) = ((millis / (1000*60*60)) % 24).toInt()
 
     fun hoursToMillis(hours: Int) = (hours * 3600000).toLong()
     fun minutesToMillis(minutes: Int) = (minutes * 60 * 1000).toLong()

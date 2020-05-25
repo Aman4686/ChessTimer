@@ -39,6 +39,7 @@ class TimerView(@NonNull inflater: LayoutInflater, @NonNull lifecycleOwner: Life
             bottomSecondaryTimer , topSecondaryTimer)
         model.initTime(timer)
 
+
     }
 
     private fun initIds() {

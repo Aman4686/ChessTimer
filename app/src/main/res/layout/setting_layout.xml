@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.chesstimer.features.settings.SettingViewModel" />
+            type="com.example.chesstimer.features.settings.SettingsListViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import com.example.chesstimer.MainActivity
 import com.example.chesstimer.common.navigation.TimerNavigator
 import com.example.chesstimer.dataBase.DataBaseRepo
-import com.example.chesstimer.dataBase.SettingEntity
 import com.example.chesstimer.dataBase.TemporaryEntity
 import io.reactivex.rxkotlin.subscribeBy
 import javax.inject.Inject
@@ -30,14 +29,14 @@ class CreatorViewModel : ViewModel() {
         val temporary = temporaryLiveData.value
         if(temporary != null){
             temporary.title = title
-            temporary.time = time
+            temporary.timeDuration = time
             data.updateTemporary(temporary)
             navigator.navigateBack()
         }
     }
 
     fun onBackCliked(v : View){
-        // data.insertTemporary(SettingEntity(title , time))
+        // data.insertTemporary(SettingEntity(title , duration))
         navigator.navigateBack()
     }
 

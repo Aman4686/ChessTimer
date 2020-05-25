@@ -9,7 +9,7 @@ import com.example.chesstimer.common.TimerUtils
 import com.example.chesstimer.dataBase.SettingEntity
 import kotlinx.android.synthetic.main.setting_item.view.*
 
-class SettingRecyclerAdapter : RecyclerView.Adapter<SettingRecyclerAdapter.ViewHolder>() {
+class SettingsListRecyclerAdapter : RecyclerView.Adapter<SettingsListRecyclerAdapter.ViewHolder>() {
 
     var settingsList = ArrayList<SettingEntity>()
     var checkedPosition = 0
@@ -46,7 +46,7 @@ class SettingRecyclerAdapter : RecyclerView.Adapter<SettingRecyclerAdapter.ViewH
         val itemFrame = itemView.cl_frame_settingItem
 
         fun bind(item : SettingEntity){
-            val timeFormatted = TimerUtils.getFormattedTime(item.time)
+            val timeFormatted = TimerUtils.getFormattedTime(item.timeDuration)
 
             time.text = timeFormatted
             id.text = item.id.toString()

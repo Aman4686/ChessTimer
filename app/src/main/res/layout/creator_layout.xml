@@ -35,7 +35,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/title_creator"
                     android:textColor="@color/colorWhite"
-                    android:textSize="30dp" />
+                    android:textSize="30sp" />
                 <EditText
                     android:text="@{viewModel.temporaryLiveData.title}"
                     android:id="@+id/ed_title_creator"
@@ -59,32 +59,17 @@
                     android:layout_height="wrap_content"
                     android:text="@string/time_creator"
                     android:textColor="@color/colorWhite"
-                    android:textSize="30dp" />
+                    android:textSize="30sp" />
                 <TextView
                     android:layout_marginStart="5dp"
                     android:id="@+id/ed_time_creator"
-                    android:formattedTime="@{viewModel.temporaryLiveData.time}"
+                    android:formattedTime="@{viewModel.temporaryLiveData.timeDuration}"
                     android:textSize="25sp"
                     android:textColor="@color/colorWhite"
                     android:backgroundTint="@color/colorWhite"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </LinearLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/title_creator"
-                android:textColorHint="@color/colorWhite">
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:maxLines="1"
-                    android:inputType="text"
-                    android:textColor="@color/colorWhite"
-                    android:backgroundTint="@color/colorWhite"/>
-            </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 
         <TextView

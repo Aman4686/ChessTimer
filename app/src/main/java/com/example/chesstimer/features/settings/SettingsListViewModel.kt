@@ -12,7 +12,7 @@ import io.reactivex.rxkotlin.subscribeBy
 
 import javax.inject.Inject
 
-class SettingViewModel : ViewModel(){
+class SettingsListViewModel : ViewModel(){
     @Inject
     lateinit var navigator : TimerNavigator
 
@@ -20,7 +20,7 @@ class SettingViewModel : ViewModel(){
     lateinit var data : DataBaseRepo
 
     val settingListModel = MutableLiveData<List<SettingEntity>>()
-    val adapter = SettingRecyclerAdapter()
+    val adapter = SettingsListRecyclerAdapter()
 
     init {
         MainActivity.appComponent.inject(this)
