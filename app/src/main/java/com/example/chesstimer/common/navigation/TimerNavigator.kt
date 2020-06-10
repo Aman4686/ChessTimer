@@ -2,7 +2,7 @@ package com.example.chesstimer.common.navigation
 
 interface TimerNavigator {
 
-    fun navigateToSettings()
+    fun navigateToSettingsList()
     fun navigateToCreator()
     fun navigateBack()
 

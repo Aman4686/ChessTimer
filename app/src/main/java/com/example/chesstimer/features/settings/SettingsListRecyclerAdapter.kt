@@ -34,7 +34,7 @@ class SettingsListRecyclerAdapter : RecyclerView.Adapter<SettingsListRecyclerAda
         notifyDataSetChanged()
     }
 
-    fun getSelectedItemId() : Int {
+    fun getSelectedItemindex() : Int {
         return checkedPosition
     }
 

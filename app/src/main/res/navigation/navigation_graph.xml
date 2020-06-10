@@ -23,5 +23,9 @@
     <fragment
         android:id="@+id/creatorFragment"
         android:name="com.example.chesstimer.features.creator.CreatorFragment"
-        android:label="CreatorFragment" />
+        android:label="CreatorFragment" >
+        <action
+            android:id="@+id/action_creatorFragment_to_settingFragment"
+            app:destination="@id/settingFragment" />
+    </fragment>
 </navigation>

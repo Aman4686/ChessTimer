@@ -17,18 +17,6 @@ class TimerFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         model = ViewModelProvider(this)[TimerViewModel::class.java]
-        model.timerStateObserver.observe(this, Observer {
-
-            if(it.timerState == TimerState.PAUSED)
-                model.timers.pausedTimers()
-
-            if(it.timerState == TimerState.RUNNING)
-                model.timers.startTimer(it.gameTurnState)
-
-            if(it.timerState == TimerState.RESETED)
-                model.timers.refreshTimers()
-
-        })
     }
 
 

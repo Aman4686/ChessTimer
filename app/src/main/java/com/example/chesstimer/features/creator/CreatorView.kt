@@ -10,7 +10,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
-import androidx.lifecycle.observe
 import com.example.chesstimer.R
 import com.example.chesstimer.basic.BaseView
 import com.example.chesstimer.common.Duration
@@ -25,6 +24,8 @@ class CreatorView(@NonNull inflater: LayoutInflater, @NonNull lifecycleOwner: Li
                   @Nullable container: ViewGroup, @NonNull val model: CreatorViewModel , val fragment: FragmentManager?) : BaseView() {
 
     lateinit var save : TextView
+    lateinit var back : TextView
+    lateinit var addToList : TextView
     lateinit var itemTitle : EditText
     lateinit var itemTime : TextView
     lateinit var temporaryEntity : TemporaryEntity
@@ -56,12 +57,21 @@ class CreatorView(@NonNull inflater: LayoutInflater, @NonNull lifecycleOwner: Li
         save.setOnClickListener {
             val title = itemTitle.text.toString()
             val time = temporaryEntity.timeDuration
-            model.onSaveCliked(title , time)
+            model.onSaveClicked(title , time)
         }
+
+        addToList.setOnClickListener {
+            val title = itemTitle.text.toString()
+            val time = temporaryEntity.timeDuration
+            model.onAddToListClicked(title , time)
+        }
+
     }
 
     private fun initIds() {
         save = viewLayout.findViewById(R.id.btn_save_creator)
+        back = viewLayout.findViewById(R.id.btn_back_creator)
+        addToList = viewLayout.findViewById(R.id.btn_addToList_creator)
         itemTitle = viewLayout.findViewById(R.id.ed_title_creator)
         itemTime = viewLayout.findViewById(R.id.ed_time_creator)
     }

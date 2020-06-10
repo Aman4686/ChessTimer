@@ -35,8 +35,8 @@ class SettingsListViewModel : ViewModel(){
     }
 
     fun onStartClicked(v : View){
-        val id = adapter.getSelectedItemId()
-        PrefUtils.addGameConfig(id)
+        val index = adapter.getSelectedItemindex()
+        PrefUtils.addGameConfig(index)
         navigator.navigateBack()
     }
 

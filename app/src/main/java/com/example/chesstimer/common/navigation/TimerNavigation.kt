@@ -11,8 +11,8 @@ class TimerNavigation @Inject constructor(activity: AppCompatActivity) : TimerNa
 
     private val navController: NavController = Navigation.findNavController(activity, R.id.nav_host_fragment)
 
-    override fun navigateToSettings() {
- //       navController.navigate(R.id.action_timerFragment_to_settingFragment)
+    override fun navigateToSettingsList() {
+        navController.navigate(R.id.action_creatorFragment_to_settingFragment)
     }
 
     override fun navigateToCreator() {

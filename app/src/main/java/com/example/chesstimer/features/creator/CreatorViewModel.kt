@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.example.chesstimer.MainActivity
 import com.example.chesstimer.common.navigation.TimerNavigator
 import com.example.chesstimer.dataBase.DataBaseRepo
+import com.example.chesstimer.dataBase.SettingEntity
 import com.example.chesstimer.dataBase.TemporaryEntity
 import io.reactivex.rxkotlin.subscribeBy
 import javax.inject.Inject
@@ -25,7 +26,7 @@ class CreatorViewModel : ViewModel() {
         initCreator()
     }
 
-    fun onSaveCliked(title : String , time : Long){
+    fun onSaveClicked(title : String, time : Long){
         val temporary = temporaryLiveData.value
         if(temporary != null){
             temporary.title = title
@@ -35,12 +36,18 @@ class CreatorViewModel : ViewModel() {
         }
     }
 
-    fun onBackCliked(v : View){
+    fun onAddToListClicked(title : String , time : Long){
+        data.insertSetting(SettingEntity(title, time))
+    }
+
+    fun onBackClicked(v : View){
         // data.insertTemporary(SettingEntity(title , duration))
         navigator.navigateBack()
     }
 
-
+    fun onListClicked(v : View){
+     navigator.navigateToSettingsList()
+    }
 
     fun initCreator(){
         data.getTemporary().subscribeBy{

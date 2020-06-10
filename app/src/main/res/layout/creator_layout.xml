@@ -72,43 +72,94 @@
             </LinearLayout>
         </LinearLayout>
 
-        <TextView
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginBottom="20dp">
 
-            android:id="@+id/btn_back_creator"
+            <TextView
+                android:layout_margin="5dp"
+                android:id="@+id/btn_back_creator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@color/gradientPartOne"
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="@{viewModel::onBackClicked}"
+                android:paddingStart="40dp"
+                android:paddingTop="5dp"
+                android:paddingEnd="40dp"
+                android:paddingBottom="5dp"
+                android:text="Back"
+                android:textSize="20sp" />
+
+            <TextView
+                android:onClick="@{viewModel::onListClicked}"
+                android:layout_margin="5dp"
+                android:id="@+id/btn_list_creator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@color/gradientPartOne"
+                android:clickable="true"
+                android:focusable="true"
+                android:paddingStart="40dp"
+                android:paddingTop="5dp"
+                android:paddingEnd="40dp"
+                android:paddingBottom="5dp"
+
+                android:text="list"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_margin="5dp"
+                android:id="@+id/btn_save_creator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@color/gradientPartOne"
+                android:clickable="true"
+                android:focusable="true"
+                android:paddingStart="40dp"
+                android:paddingTop="5dp"
+                android:paddingEnd="40dp"
+                android:paddingBottom="5dp"
+                android:text="start"
+                android:textSize="20dp" />
+        </LinearLayout>
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="40dp"
-            android:background="@color/gradientPartOne"
-            android:clickable="true"
-            android:focusable="true"
-            android:paddingStart="40dp"
-            android:paddingTop="5dp"
-            android:paddingEnd="40dp"
-            android:paddingBottom="5dp"
-            android:text="Back"
-            android:textSize="20sp"
+            android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/btn_save_creator"
-            app:layout_constraintStart_toStartOf="parent" />
-        <TextView
-            android:onClick="@{viewModel::onBackCliked}"
-            android:focusable="true"
-            android:clickable="true"
-            android:id="@+id/btn_save_creator"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="40dp"
-            android:background="@color/gradientPartOne"
-            android:paddingStart="40dp"
-            android:paddingTop="5dp"
-            android:paddingEnd="40dp"
-            android:paddingBottom="5dp"
-            android:text="save"
-            android:textSize="20dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginBottom="70dp">
+
+
+            <TextView
+                android:layout_margin="5dp"
+                android:id="@+id/btn_addToList_creator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@color/gradientPartOne"
+                android:clickable="true"
+                android:focusable="true"
+                android:paddingStart="40dp"
+                android:paddingTop="5dp"
+                android:paddingEnd="40dp"
+                android:paddingBottom="5dp"
+                android:text="add to list"
+                android:textSize="20dp" />
+        </LinearLayout>
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
