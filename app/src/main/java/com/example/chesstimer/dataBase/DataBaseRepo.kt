@@ -31,34 +31,11 @@ class DataBaseRepo {
             .subscribe()
     }
 
-    fun getTemporary(): Single<TemporaryEntity> {
-        return App.db.temporaryDAO().getTemporary()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-    }
-
-    fun getAllTemporary(): Observable<List<TemporaryEntity>> {
-        return App.db.temporaryDAO().getAllTemporary()
-            .observeOn(AndroidSchedulers.mainThread())
-    }
-
-    fun insertTemporary(temporaryEntity: TemporaryEntity) {
-        Completable.fromCallable {
-            App.db.temporaryDAO().insert(temporaryEntity)
-        }.subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe()
-    }
-
-    fun updateTemporary(temporaryEntity: TemporaryEntity) {
+    fun updateSetting(settingEntity: SettingEntity) {
         Completable.fromAction{
-            App.db.temporaryDAO().update(temporaryEntity)
-            LogUtils.d("lolololo" , "updateTemporary")
+            App.db.settingDAO().update(settingEntity)
         }
             .subscribeOn(Schedulers.io())
-            .doOnComplete {
-                LogUtils.d("lolololo" , "updateTemporary")
-            }
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe()
     }

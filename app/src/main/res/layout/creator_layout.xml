@@ -37,7 +37,7 @@
                     android:textColor="@color/colorWhite"
                     android:textSize="30sp" />
                 <EditText
-                    android:text="@{viewModel.temporaryLiveData.title}"
+                    android:text="@{viewModel.settingLiveData.title}"
                     android:id="@+id/ed_title_creator"
                     android:textSize="20sp"
                     android:textColor="@color/colorWhite"
@@ -63,7 +63,7 @@
                 <TextView
                     android:layout_marginStart="5dp"
                     android:id="@+id/ed_time_creator"
-                    android:formattedTime="@{viewModel.temporaryLiveData.timeDuration}"
+                    android:formattedTime="@{viewModel.settingLiveData.timeDuration}"
                     android:textSize="25sp"
                     android:textColor="@color/colorWhite"
                     android:backgroundTint="@color/colorWhite"
@@ -80,23 +80,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginBottom="20dp">
-
-            <TextView
-                android:layout_margin="5dp"
-                android:id="@+id/btn_back_creator"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:background="@color/gradientPartOne"
-                android:clickable="true"
-                android:focusable="true"
-                android:onClick="@{viewModel::onBackClicked}"
-                android:paddingStart="40dp"
-                android:paddingTop="5dp"
-                android:paddingEnd="40dp"
-                android:paddingBottom="5dp"
-                android:text="Back"
-                android:textSize="20sp" />
 
             <TextView
                 android:onClick="@{viewModel::onListClicked}"
@@ -117,6 +100,7 @@
                 android:textSize="20sp" />
 
             <TextView
+                android:onClick="@{viewModel::onBackClicked}"
                 android:layout_margin="5dp"
                 android:id="@+id/btn_save_creator"
                 android:layout_width="wrap_content"
@@ -125,41 +109,13 @@
                 android:background="@color/gradientPartOne"
                 android:clickable="true"
                 android:focusable="true"
-                android:paddingStart="40dp"
+                android:paddingStart="10dp"
                 android:paddingTop="5dp"
-                android:paddingEnd="40dp"
+                android:paddingEnd="10dp"
                 android:paddingBottom="5dp"
-                android:text="start"
+                android:text="start/back"
                 android:textSize="20dp" />
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginBottom="70dp">
-
-
-            <TextView
-                android:layout_margin="5dp"
-                android:id="@+id/btn_addToList_creator"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:background="@color/gradientPartOne"
-                android:clickable="true"
-                android:focusable="true"
-                android:paddingStart="40dp"
-                android:paddingTop="5dp"
-                android:paddingEnd="40dp"
-                android:paddingBottom="5dp"
-                android:text="add to list"
-                android:textSize="20dp" />
-        </LinearLayout>
-
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

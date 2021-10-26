@@ -16,7 +16,6 @@ class CreatorFragment : BaseFragment() {
 
     }
 
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         val creatorView = CreatorView(inflater ,this , container!! , model , fragmentManager)

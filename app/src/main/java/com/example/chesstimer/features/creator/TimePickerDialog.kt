@@ -11,8 +11,6 @@ import androidx.fragment.app.DialogFragment
 import com.example.chesstimer.R
 import com.example.chesstimer.common.Duration
 
-import java.lang.String
-
 import java.util.*
 
 

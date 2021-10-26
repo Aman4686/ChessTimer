@@ -43,7 +43,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
 
-    String navigationVersion = '2.2.1'
+    String navigationVersion = '2.3.1'
     implementation "androidx.navigation:navigation-fragment:$navigationVersion"
     implementation "androidx.navigation:navigation-ui:$navigationVersion"
 
@@ -57,22 +57,28 @@ dependencies {
     implementation "android.arch.persistence.room:runtime:$roomVersion"
     annotationProcessor "android.arch.persistence.room:compiler:$roomVersion"
 
+    implementation 'com.github.bumptech.glide:glide:4.9.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
+
     implementation 'io.reactivex.rxjava2:rxkotlin:2.2.0'
     implementation 'io.reactivex.rxjava2:rxjava:2.1.6'
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
     implementation "androidx.recyclerview:recyclerview:1.1.0"
 
+    String butterknifeVersion = '10.0.0'
+    implementation "com.jakewharton:butterknife:$butterknifeVersion"
+    kapt "com.jakewharton:butterknife-compiler:$butterknifeVersion"
 
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation "androidx.preference:preference:1.1.0"
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation "androidx.preference:preference:1.1.1"
     implementation 'androidx.annotation:annotation:1.1.0'
     implementation 'com.google.android.material:material:1.2.0-alpha05'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
 
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     testImplementation 'junit:junit:4.12'
 }
 repositories {

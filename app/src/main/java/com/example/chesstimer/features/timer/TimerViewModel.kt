@@ -8,22 +8,26 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.chesstimer.MainActivity
 import com.example.chesstimer.R
+import com.example.chesstimer.basic.BaseViewModel
 import com.example.chesstimer.common.LogUtils
+import com.example.chesstimer.common.PrefUtils
 import com.example.chesstimer.common.navigation.TimerNavigator
 import com.example.chesstimer.common.states.GameTurnState
 import com.example.chesstimer.common.states.TimerState
 import com.example.chesstimer.dataBase.DataBaseRepo
-import com.example.chesstimer.dataBase.TemporaryEntity
+import com.example.chesstimer.dataBase.SettingEntity
 import io.reactivex.rxkotlin.subscribeBy
 import javax.inject.Inject
 
-class TimerViewModel : ViewModel() {
+class TimerViewModel : BaseViewModel() {
 
     @Inject
     lateinit var navigator : TimerNavigator
 
     @Inject
     lateinit var data : DataBaseRepo
+
+
 
     val timerStateObserver = MutableLiveData(TimerStateObserver())
     val timers = CountDownTimers(this)
@@ -33,22 +37,23 @@ class TimerViewModel : ViewModel() {
     }
 
     fun initTime(timer: CountDownTimers){
-        data.getTemporary().subscribeBy ({
-            LogUtils.d("lolololo" , "new time")
-            data.insertTemporary(TemporaryEntity("fsdfs" , 120000))
+        val gameId = PrefUtils.getGameConfig()
+
+        data.getSettingById(gameId).subscribeBy ({
+            data.insertSetting(SettingEntity("fsdfs" , 120000))
             timer.gameTime = 120000
+            PrefUtils.addGameConfig(gameId)
             timer.refreshTimers()
         },{
             timer.gameTime = it.timeDuration
             timer.refreshTimers()
-            LogUtils.d("lolololo" , "download time " + it.timeDuration)
         })
 
-        data.getAllTemporary().subscribeBy ({
+        data.getAllSetings().subscribeBy ({
         },{
         },{
             for(all in it){
-                LogUtils.d("lolololo" , "temp time " + all.id)
+
             }
         })
 

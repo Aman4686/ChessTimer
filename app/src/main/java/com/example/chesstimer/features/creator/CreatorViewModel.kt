@@ -4,14 +4,15 @@ import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.chesstimer.MainActivity
+import com.example.chesstimer.basic.BaseViewModel
+import com.example.chesstimer.common.PrefUtils
 import com.example.chesstimer.common.navigation.TimerNavigator
 import com.example.chesstimer.dataBase.DataBaseRepo
 import com.example.chesstimer.dataBase.SettingEntity
-import com.example.chesstimer.dataBase.TemporaryEntity
 import io.reactivex.rxkotlin.subscribeBy
 import javax.inject.Inject
 
-class CreatorViewModel : ViewModel() {
+class CreatorViewModel : BaseViewModel() {
 
     @Inject
     lateinit var navigator : TimerNavigator
@@ -19,19 +20,19 @@ class CreatorViewModel : ViewModel() {
     @Inject
     lateinit var data : DataBaseRepo
 
-    val temporaryLiveData = MutableLiveData<TemporaryEntity>()
+    val settingLiveData = MutableLiveData<SettingEntity>()
 
     init {
         MainActivity.appComponent.inject(this)
-        initCreator()
+            //  initCreator()
     }
 
     fun onSaveClicked(title : String, time : Long){
-        val temporary = temporaryLiveData.value
-        if(temporary != null){
-            temporary.title = title
-            temporary.timeDuration = time
-            data.updateTemporary(temporary)
+        val settingItem = settingLiveData.value
+        if(settingItem != null){
+            settingItem.title = title
+            settingItem.timeDuration = time
+            data.updateSetting(settingItem)
             navigator.navigateBack()
         }
     }
@@ -41,7 +42,6 @@ class CreatorViewModel : ViewModel() {
     }
 
     fun onBackClicked(v : View){
-        // data.insertTemporary(SettingEntity(title , duration))
         navigator.navigateBack()
     }
 
@@ -50,8 +50,9 @@ class CreatorViewModel : ViewModel() {
     }
 
     fun initCreator(){
-        data.getTemporary().subscribeBy{
-            temporaryLiveData.value = it
+        val gameId = PrefUtils.getGameConfig()
+        data.getSettingById(gameId).subscribeBy{
+            settingLiveData.value = it
         }
     }
 

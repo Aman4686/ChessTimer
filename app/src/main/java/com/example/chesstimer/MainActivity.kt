@@ -22,6 +22,4 @@ class MainActivity : BaseActivity() {
             .navModule(NavModule(this))
             .build()
     }
-
-
 }

@@ -7,15 +7,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.chesstimer.R
 import com.example.chesstimer.common.TimerUtils
 import com.example.chesstimer.dataBase.SettingEntity
-import kotlinx.android.synthetic.main.setting_item.view.*
+import kotlinx.android.synthetic.main.list_item.view.*
 
-class SettingsListRecyclerAdapter : RecyclerView.Adapter<SettingsListRecyclerAdapter.ViewHolder>() {
+class ListRecyclerAdapter : RecyclerView.Adapter<ListRecyclerAdapter.ViewHolder>() {
 
     var settingsList = ArrayList<SettingEntity>()
     var checkedPosition = 0
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.setting_item, parent, false);
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.list_item, parent, false);
         return ViewHolder(view)
     }
 

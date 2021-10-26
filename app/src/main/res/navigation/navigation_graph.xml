@@ -17,15 +17,15 @@
             app:popUpTo="@+id/timerFragment" />
     </fragment>
     <fragment
-        android:id="@+id/settingFragment"
-        android:name="com.example.chesstimer.features.settings.SettingsListFragment"
+        android:id="@+id/listFragment"
+        android:name="com.example.chesstimer.features.settings.ListFragment"
         android:label="SettingFragment" />
     <fragment
         android:id="@+id/creatorFragment"
         android:name="com.example.chesstimer.features.creator.CreatorFragment"
         android:label="CreatorFragment" >
         <action
-            android:id="@+id/action_creatorFragment_to_settingFragment"
-            app:destination="@id/settingFragment" />
+            android:id="@+id/action_creatorFragment_to_listFragment"
+            app:destination="@id/listFragment" />
     </fragment>
 </navigation>

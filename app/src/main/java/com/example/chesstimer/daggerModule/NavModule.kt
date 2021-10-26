@@ -10,6 +10,7 @@ import dagger.Provides
 @Module
 class NavModule(private val activity: AppCompatActivity) {
 
+
     @Provides
     fun provideAppCompatActivity() : AppCompatActivity{
         return activity

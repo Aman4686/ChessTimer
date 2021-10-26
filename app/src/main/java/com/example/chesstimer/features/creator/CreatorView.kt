@@ -4,76 +4,79 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
-import androidx.annotation.NonNull
-import androidx.annotation.Nullable
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
+import butterknife.BindView
+import butterknife.ButterKnife
 import com.example.chesstimer.R
 import com.example.chesstimer.basic.BaseView
+import com.example.chesstimer.basic.BaseViewModel
 import com.example.chesstimer.common.Duration
 import com.example.chesstimer.common.TimerUtils
 import com.example.chesstimer.common.TimerUtils.hoursToMillis
 import com.example.chesstimer.common.TimerUtils.minutesToMillis
 import com.example.chesstimer.common.TimerUtils.secondsToMillis
-import com.example.chesstimer.dataBase.TemporaryEntity
+import com.example.chesstimer.dataBase.SettingEntity
 import com.example.chesstimer.databinding.CreatorLayoutBinding
 
-class CreatorView(@NonNull inflater: LayoutInflater, @NonNull lifecycleOwner: LifecycleOwner,
-                  @Nullable container: ViewGroup, @NonNull val model: CreatorViewModel , val fragment: FragmentManager?) : BaseView() {
+class CreatorView( inflater: LayoutInflater,
+                   lifecycleOwner: LifecycleOwner,
+                   container: ViewGroup,
+                   private val model: CreatorViewModel,
+                   private val fragment: FragmentManager?) : BaseView() {
 
+    @BindView(R.id.btn_save_creator)
     lateinit var save : TextView
-    lateinit var back : TextView
-    lateinit var addToList : TextView
+
+    @BindView(R.id.ed_title_creator)
     lateinit var itemTitle : EditText
+
+    @BindView(R.id.ed_time_creator)
     lateinit var itemTime : TextView
-    lateinit var temporaryEntity : TemporaryEntity
+
+    lateinit var settingEntity : SettingEntity
     lateinit var timePickerDialog : TimePickerDialog
 
-    init {
+    override fun getLayoutId(): Int {
+        return R.layout.creator_layout
+    }
+    override fun initViewBinding(inflater: LayoutInflater, lifecycleOwner: LifecycleOwner,
+                                 container: ViewGroup, model: BaseViewModel
+    ){
         val mDataBinding : CreatorLayoutBinding = DataBindingUtil.inflate(inflater, R.layout.creator_layout, container, false)
         mDataBinding.lifecycleOwner = lifecycleOwner
         mDataBinding.executePendingBindings()
-        mDataBinding.viewModel = model
+        mDataBinding.viewModel = model as CreatorViewModel
         viewLayout = mDataBinding.root
-        initIds()
+        unbinder = ButterKnife.bind(this , viewLayout)
+        context = mDataBinding.root.context
+    }
+
+    init {
+        initViewBinding(inflater , lifecycleOwner , container , model)
         initOnClick()
 
-        model.temporaryLiveData.observe(lifecycleOwner, Observer {
-            temporaryEntity = it
+        model.settingLiveData.observe(lifecycleOwner, Observer {
+            settingEntity = it
         })
-
     }
 
     private fun initOnClick() {
         itemTime.setOnClickListener{
             if(fragment != null) {
-                timePickerDialog = initTimePickerDialog(Duration(temporaryEntity.timeDuration))
+                timePickerDialog = initTimePickerDialog(Duration(settingEntity.timeDuration))
                 timePickerDialog.show(fragment, "SimpleDialog")
             }
         }
 
         save.setOnClickListener {
             val title = itemTitle.text.toString()
-            val time = temporaryEntity.timeDuration
+            val time = settingEntity.timeDuration
             model.onSaveClicked(title , time)
         }
 
-        addToList.setOnClickListener {
-            val title = itemTitle.text.toString()
-            val time = temporaryEntity.timeDuration
-            model.onAddToListClicked(title , time)
-        }
-
-    }
-
-    private fun initIds() {
-        save = viewLayout.findViewById(R.id.btn_save_creator)
-        back = viewLayout.findViewById(R.id.btn_back_creator)
-        addToList = viewLayout.findViewById(R.id.btn_addToList_creator)
-        itemTitle = viewLayout.findViewById(R.id.ed_title_creator)
-        itemTime = viewLayout.findViewById(R.id.ed_time_creator)
     }
 
     private fun initTimePickerDialog(duration : Duration) : TimePickerDialog{
@@ -81,8 +84,8 @@ class CreatorView(@NonNull inflater: LayoutInflater, @NonNull lifecycleOwner: Li
        return TimePickerDialog(duration){hour , min , sec->
            val result = hoursToMillis(hour) + minutesToMillis(min) + secondsToMillis(sec)
 
-           temporaryEntity.timeDuration = result
-           model.temporaryLiveData.value = temporaryEntity
+           settingEntity.timeDuration = result
+           model.settingLiveData.value = settingEntity
 
            itemTime.text = TimerUtils.getFormattedTime(result)
         }

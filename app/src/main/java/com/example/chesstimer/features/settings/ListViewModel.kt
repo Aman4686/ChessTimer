@@ -4,6 +4,7 @@ import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.chesstimer.MainActivity
+import com.example.chesstimer.basic.BaseViewModel
 import com.example.chesstimer.common.PrefUtils
 import com.example.chesstimer.common.navigation.TimerNavigator
 import com.example.chesstimer.dataBase.DataBaseRepo
@@ -12,7 +13,8 @@ import io.reactivex.rxkotlin.subscribeBy
 
 import javax.inject.Inject
 
-class SettingsListViewModel : ViewModel(){
+class ListViewModel : BaseViewModel(){
+
     @Inject
     lateinit var navigator : TimerNavigator
 
@@ -20,7 +22,7 @@ class SettingsListViewModel : ViewModel(){
     lateinit var data : DataBaseRepo
 
     val settingListModel = MutableLiveData<List<SettingEntity>>()
-    val adapter = SettingsListRecyclerAdapter()
+    val adapter = ListRecyclerAdapter()
 
     init {
         MainActivity.appComponent.inject(this)
@@ -31,7 +33,7 @@ class SettingsListViewModel : ViewModel(){
     fun initList() {
        data.getAllSetings().subscribeBy {
             settingListModel.value = it
-        }
+       }
     }
 
     fun onStartClicked(v : View){

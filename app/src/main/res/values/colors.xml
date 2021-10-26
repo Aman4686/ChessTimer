@@ -12,10 +12,10 @@
 
     <color name="transparent">#00000000</color>
 
-    <color name="gradientPartOne">#F3904F</color>
-    <color name="gradientPartOneFinished">#F8502A</color>
-    <color name="gradientPartTwo">#3B4371</color>
-    <color name="gradientPartTwoFinished">#3B4371</color>
+    <color name="gradientPartOne">#FFDD00</color>
+    <color name="gradientPartOneFinished">#2AF8E0</color>
+    <color name="gradientPartTwo">#FF00F2</color>
+    <color name="gradientPartTwoFinished">#F400FF</color>
 
 
 <!--    app:enterAnim="@anim/slide_in_right"-->

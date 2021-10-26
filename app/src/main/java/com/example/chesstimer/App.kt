@@ -16,7 +16,7 @@ class App : Application() {
         super.onCreate()
         instance = this
         PrefUtils.init(this)
-        db =  Room.databaseBuilder(applicationContext, AppDataBase::class.java, "database").build()
+        db = Room.databaseBuilder(applicationContext, AppDataBase::class.java, "database").build()
     }
 
 }

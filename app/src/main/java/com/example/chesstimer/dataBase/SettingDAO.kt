@@ -3,6 +3,7 @@ package com.example.chesstimer.dataBase
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Update
 import io.reactivex.Flowable
 import io.reactivex.Single
 @Dao
@@ -15,6 +16,9 @@ interface SettingDAO {
     fun getSettingById(id : Int) : Single<SettingEntity>
 
     @Insert
-    fun insert(settting: SettingEntity)
+    fun insert(setting: SettingEntity)
+
+    @Update
+    fun update(settingEntity: SettingEntity)
 
 }

@@ -10,13 +10,13 @@ import com.example.chesstimer.basic.BaseFragment
 import io.reactivex.Completable
 import io.reactivex.android.schedulers.AndroidSchedulers
 
-class SettingsListFragment : BaseFragment(){
+class ListFragment : BaseFragment(){
 
-    lateinit var model : SettingsListViewModel
+    lateinit var model : ListViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        model = ViewModelProvider(this)[SettingsListViewModel::class.java]
+        model = ViewModelProvider(this)[ListViewModel::class.java]
 
     }
 
@@ -27,7 +27,7 @@ class SettingsListFragment : BaseFragment(){
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        val settingView = SettingsListView(inflater ,this , container!! , model)
+        val settingView = ListView(inflater ,this , container!! , model)
         Completable.complete()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
