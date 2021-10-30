@@ -1,31 +1,27 @@
 package com.example.chesstimer.dataBase
 
-import android.util.Log
-import com.example.chesstimer.App
-import com.example.chesstimer.common.LogUtils
-import com.example.chesstimer.data.SettingData
+import com.example.chesstimer.dataBase.dao.SettingEntity
 import io.reactivex.*
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
-import kotlin.math.log
+import javax.inject.Inject
 
-class DataBaseRepo {
+class DataBaseRepo @Inject constructor(val dataBase : AppDataBase){
 
     fun getAllSetings(): Flowable<List<SettingEntity>> {
-        return App.db.settingDAO().getAll()
+        return dataBase.settingDAO().getAll()
             .observeOn(AndroidSchedulers.mainThread())
     }
 
     fun getSettingById(id: Int): Single<SettingEntity> {
-        return App.db.settingDAO().getSettingById(id)
+        return dataBase.settingDAO().getSettingById(id)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
 
     fun insertSetting(settingEntity: SettingEntity) {
         Completable.fromCallable {
-            App.db.settingDAO().insert(settingEntity)
+            dataBase.settingDAO().insert(settingEntity)
         }.subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe()
@@ -33,7 +29,7 @@ class DataBaseRepo {
 
     fun updateSetting(settingEntity: SettingEntity) {
         Completable.fromAction{
-            App.db.settingDAO().update(settingEntity)
+            dataBase.settingDAO().update(settingEntity)
         }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

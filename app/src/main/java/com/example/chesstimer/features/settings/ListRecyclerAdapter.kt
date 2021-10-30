@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.chesstimer.R
 import com.example.chesstimer.common.TimerUtils
-import com.example.chesstimer.dataBase.SettingEntity
+import com.example.chesstimer.dataBase.dao.SettingEntity
 import kotlinx.android.synthetic.main.list_item.view.*
 
 class ListRecyclerAdapter : RecyclerView.Adapter<ListRecyclerAdapter.ViewHolder>() {

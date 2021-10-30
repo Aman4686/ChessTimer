@@ -18,7 +18,7 @@ import com.example.chesstimer.common.TimerUtils
 import com.example.chesstimer.common.TimerUtils.hoursToMillis
 import com.example.chesstimer.common.TimerUtils.minutesToMillis
 import com.example.chesstimer.common.TimerUtils.secondsToMillis
-import com.example.chesstimer.dataBase.SettingEntity
+import com.example.chesstimer.dataBase.dao.SettingEntity
 import com.example.chesstimer.databinding.CreatorLayoutBinding
 
 class CreatorView( inflater: LayoutInflater,

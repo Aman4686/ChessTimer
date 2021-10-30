@@ -1,6 +1,6 @@
 package com.example.chesstimer.data
 
-import com.example.chesstimer.dataBase.SettingEntity
+import com.example.chesstimer.dataBase.dao.SettingEntity
 
 class SettingData {
 

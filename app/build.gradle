@@ -20,17 +20,21 @@ android {
         enabled = true
         version = "3.4.1"
     }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
         sourceCompatibility = 1.8
         targetCompatibility = 1.8
     }
+
 }
+
 
 dependencies {
     kapt "com.android.databinding:compiler:3.1.4"
@@ -44,11 +48,11 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
 
     String navigationVersion = '2.3.1'
-    implementation "androidx.navigation:navigation-fragment:$navigationVersion"
-    implementation "androidx.navigation:navigation-ui:$navigationVersion"
+    implementation "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
+    implementation "androidx.navigation:navigation-ui-ktx:$navigationVersion"
 
-    String daggerVersion = '2.21'
-    implementation "com.google.dagger:dagger-android:$daggerVersion"
+    String daggerVersion = '2.36'
+    implementation "com.google.dagger:dagger:$daggerVersion"
     kapt "com.google.dagger:dagger-compiler:$daggerVersion"
 
     String roomVersion = '1.1.1'

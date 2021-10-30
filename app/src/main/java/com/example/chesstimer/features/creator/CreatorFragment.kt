@@ -1,18 +1,32 @@
 package com.example.chesstimer.features.creator
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import com.example.chesstimer.MainActivity
+import com.example.chesstimer.MainActivity.Companion.appComponent
 import com.example.chesstimer.basic.BaseFragment
+import com.example.chesstimer.features.timer.TimerViewModel
+import dagger.Lazy
+import javax.inject.Inject
 
 class CreatorFragment : BaseFragment() {
     lateinit var model : CreatorViewModel
 
+    @Inject
+    lateinit var factory: Lazy<CreatorViewModel.Factory>
+
+    override fun onAttach(context: Context) {
+        appComponent.inject(this)
+        super.onAttach(context)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        model = ViewModelProvider(this)[CreatorViewModel::class.java]
+        model = ViewModelProvider(this, factory.get())[CreatorViewModel::class.java]
 
     }
 

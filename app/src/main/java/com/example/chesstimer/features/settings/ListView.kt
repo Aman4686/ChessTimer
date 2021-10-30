@@ -18,6 +18,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 class ListView(inflater: LayoutInflater,  lifecycleOwner: LifecycleOwner,
                 container: ViewGroup,  model: ListViewModel) : BaseView() {
 
+
     @BindView(R.id.setting_create)
     lateinit var createNewSettings : FloatingActionButton
     @BindView(R.id.setting_recycler)
@@ -39,7 +40,6 @@ class ListView(inflater: LayoutInflater,  lifecycleOwner: LifecycleOwner,
         unbinder = ButterKnife.bind(this , viewLayout)
         context = mDataBinding.root.context
     }
-
 
     init {
         initViewBinding(inflater , lifecycleOwner , container , model)

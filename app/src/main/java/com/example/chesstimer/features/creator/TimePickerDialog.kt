@@ -56,14 +56,14 @@ class TimePickerDialog(private val time : Duration,
         return view
     }
 
-    fun initIds(view : View){
+    private fun initIds(view : View){
         npHours = view.findViewById(R.id.np_hours_timePicker)
         npMinutes = view.findViewById(R.id.np_minutes_timePicker)
         npSeconds = view.findViewById(R.id.np_seconds_timePicker)
         btnOk = view.findViewById(R.id.tv_ok_picker)
     }
 
-    fun loadValue(hours : Int , minutes : Int , seconds : Int){
+    private fun loadValue(hours : Int, minutes : Int, seconds : Int){
         npHours.value = hours
         npMinutes.value = minutes
         npSeconds.value = seconds

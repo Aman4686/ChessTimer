@@ -6,42 +6,36 @@ import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.chesstimer.MainActivity
+import androidx.lifecycle.ViewModelProvider
 import com.example.chesstimer.R
 import com.example.chesstimer.basic.BaseViewModel
-import com.example.chesstimer.common.LogUtils
 import com.example.chesstimer.common.PrefUtils
 import com.example.chesstimer.common.navigation.TimerNavigator
 import com.example.chesstimer.common.states.GameTurnState
 import com.example.chesstimer.common.states.TimerState
 import com.example.chesstimer.dataBase.DataBaseRepo
-import com.example.chesstimer.dataBase.SettingEntity
+import com.example.chesstimer.dataBase.dao.SettingEntity
 import io.reactivex.rxkotlin.subscribeBy
 import javax.inject.Inject
 
-class TimerViewModel : BaseViewModel() {
-
-    @Inject
-    lateinit var navigator : TimerNavigator
-
-    @Inject
-    lateinit var data : DataBaseRepo
-
+class TimerViewModel constructor(val navigator : TimerNavigator,
+                                 val data : DataBaseRepo): BaseViewModel()  {
 
 
     val timerStateObserver = MutableLiveData(TimerStateObserver())
     val timers = CountDownTimers(this)
 
-    init {
-        MainActivity.appComponent.inject(this)
-    }
-
     fun initTime(timer: CountDownTimers){
         val gameId = PrefUtils.getGameConfig()
 
         data.getSettingById(gameId).subscribeBy ({
-            data.insertSetting(SettingEntity("fsdfs" , 120000))
-            timer.gameTime = 120000
+            data.insertSetting(
+                SettingEntity(
+                    "FirstGameConfiguration",
+                    120000
+                )
+            )
+            timer.gameTime = 10000
             PrefUtils.addGameConfig(gameId)
             timer.refreshTimers()
         },{
@@ -119,6 +113,16 @@ class TimerViewModel : BaseViewModel() {
         }
     }
 
+    class Factory @Inject constructor(
+        private val navigator: TimerNavigator,
+        private val dataBaseRepo: DataBaseRepo
+    ): ViewModelProvider.Factory{
+        @Suppress("UNCHECKED_CAST")
+        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+            require(modelClass == TimerViewModel::class.java)
+            return TimerViewModel(navigator, dataBaseRepo) as T
+        }
+    }
 
     class TimerStateObserver(var gameTurnState: GameTurnState = GameTurnState.NO_ONE,
                              var timerState: TimerState = TimerState.PAUSED){

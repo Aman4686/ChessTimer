@@ -1,24 +1,21 @@
-package com.example.chesstimer.dataBase
+package com.example.chesstimer.dataBase.dao
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
 import io.reactivex.Flowable
 import io.reactivex.Single
 @Dao
 interface SettingDAO {
 
-    @Query("SELECT * FROM settingentity")
+    @Query("SELECT * FROM ${SettingEntity.TABLE_NAME}")
     fun getAll() : Flowable<List<SettingEntity>>
 
-    @Query("SELECT * FROM settingentity WHERE id = :id")
+    @Query("SELECT * FROM ${SettingEntity.TABLE_NAME} WHERE :id like id")
     fun getSettingById(id : Int) : Single<SettingEntity>
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(setting: SettingEntity)
 
-    @Update
+
     fun update(settingEntity: SettingEntity)
 
 }
