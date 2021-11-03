@@ -11,8 +11,8 @@ import androidx.lifecycle.Observer
 import butterknife.BindView
 import butterknife.ButterKnife
 import com.example.chesstimer.R
-import com.example.chesstimer.basic.BaseView
-import com.example.chesstimer.basic.BaseViewModel
+import com.example.chesstimer.base.BaseView
+import com.example.chesstimer.base.BaseViewModel
 import com.example.chesstimer.common.Duration
 import com.example.chesstimer.common.TimerUtils
 import com.example.chesstimer.common.TimerUtils.hoursToMillis
@@ -21,11 +21,13 @@ import com.example.chesstimer.common.TimerUtils.secondsToMillis
 import com.example.chesstimer.dataBase.dao.SettingEntity
 import com.example.chesstimer.databinding.CreatorLayoutBinding
 
-class CreatorView( inflater: LayoutInflater,
-                   lifecycleOwner: LifecycleOwner,
-                   container: ViewGroup,
-                   private val model: CreatorViewModel,
-                   private val fragment: FragmentManager?) : BaseView() {
+class CreatorView(
+    inflater: LayoutInflater,
+    lifecycleOwner: LifecycleOwner,
+    container: ViewGroup,
+    private val model: CreatorViewModel,
+    private val fragment: FragmentManager?
+) : BaseView() {
 
     @BindView(R.id.btn_save_creator)
     lateinit var save : TextView
@@ -37,7 +39,7 @@ class CreatorView( inflater: LayoutInflater,
     lateinit var itemTime : TextView
 
     lateinit var settingEntity : SettingEntity
-    lateinit var timePickerDialog : TimePickerDialog
+   // lateinit var timePickerDialog : TimePickerDialog
 
     override fun getLayoutId(): Int {
         return R.layout.creator_layout
@@ -61,23 +63,26 @@ class CreatorView( inflater: LayoutInflater,
         model.settingLiveData.observe(lifecycleOwner, Observer {
             settingEntity = it
         })
+
     }
 
     private fun initOnClick() {
         itemTime.setOnClickListener{
             if(fragment != null) {
-                timePickerDialog = initTimePickerDialog(Duration(settingEntity.timeDuration))
+                val timePickerDialog = initTimePickerDialog(Duration(settingEntity.timeDuration))
                 timePickerDialog.show(fragment, "SimpleDialog")
             }
         }
-
-        save.setOnClickListener {
-            val title = itemTitle.text.toString()
-            val time = settingEntity.timeDuration
-            model.onSaveClicked(title , time)
-        }
-
     }
+
+
+
+    companion object{
+        fun String.trimThis(){
+            this.trim()
+        }
+    }
+
 
     private fun initTimePickerDialog(duration : Duration) : TimePickerDialog{
 
@@ -86,7 +91,6 @@ class CreatorView( inflater: LayoutInflater,
 
            settingEntity.timeDuration = result
            model.settingLiveData.value = settingEntity
-
            itemTime.text = TimerUtils.getFormattedTime(result)
         }
 

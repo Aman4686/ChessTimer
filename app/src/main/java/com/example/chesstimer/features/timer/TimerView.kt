@@ -4,8 +4,6 @@ package com.example.chesstimer.features.timer
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.annotation.NonNull
-import androidx.annotation.Nullable
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
@@ -14,8 +12,8 @@ import butterknife.ButterKnife
 
 
 import com.example.chesstimer.R
-import com.example.chesstimer.basic.BaseView
-import com.example.chesstimer.basic.BaseViewModel
+import com.example.chesstimer.base.BaseView
+import com.example.chesstimer.base.BaseViewModel
 import com.example.chesstimer.common.states.TimerState
 import com.example.chesstimer.databinding.TimerLayoutBinding
 
@@ -35,6 +33,7 @@ class TimerView(inflater: LayoutInflater, lifecycleOwner: LifecycleOwner,
     @BindView(R.id.top_secondary_timer)
     lateinit var topSecondaryTimer : TextView
 
+    lateinit var timer : CountDownTimers
 
     override fun initViewBinding(inflater: LayoutInflater, lifecycleOwner: LifecycleOwner,
                                  container: ViewGroup, model: BaseViewModel){
@@ -49,24 +48,24 @@ class TimerView(inflater: LayoutInflater, lifecycleOwner: LifecycleOwner,
 
     init {
         initViewBinding(inflater , lifecycleOwner , container , model)
-
-        val timer = model.timers
-        timer.bind(bottomPrimaryTimer , topPrimaryTimer,
-            bottomSecondaryTimer , topSecondaryTimer)
-        model.initTime(timer)
-
+        initCountDownTimer(model)
         model.timerStateObserver.observe(lifecycleOwner, Observer {
-
-            if(it.timerState == TimerState.PAUSED)
-                model.timers.pausedTimers()
-
-            if(it.timerState == TimerState.RUNNING)
-                model.timers.startTimer(it.gameTurnState)
-
-            if(it.timerState == TimerState.RESETED)
-                model.timers.refreshTimers()
-
+            when(it.timerState){
+                TimerState.PAUSED -> timer.pausedTimers()
+                TimerState.RUNNING -> timer.startTimer(it.gameTurnState)
+                TimerState.RESETED -> timer.refreshState()
+                TimerState.FINISHED -> timer.pausedTimers()
+            }
         })
+        model.settingLiveData.observe(lifecycleOwner, Observer {
+            timer.refreshTimers(it.timeDuration)
+        })
+    }
+
+    fun initCountDownTimer(model: TimerViewModel){
+        timer = CountDownTimers(model)
+//        timer.bind(bottomPrimaryTimer , topPrimaryTimer,
+//            bottomSecondaryTimer , topSecondaryTimer)
     }
 
     override fun getLayoutId(): Int {

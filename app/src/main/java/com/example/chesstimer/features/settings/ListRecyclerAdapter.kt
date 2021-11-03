@@ -50,7 +50,6 @@ class ListRecyclerAdapter : RecyclerView.Adapter<ListRecyclerAdapter.ViewHolder>
 
             time.text = timeFormatted
             id.text = item.id.toString()
-            title.text = item.title
 
                 if (checkedPosition == adapterPosition) {
                     id.visibility = View.VISIBLE

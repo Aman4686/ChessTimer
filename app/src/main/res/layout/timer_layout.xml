@@ -32,6 +32,7 @@
                 android:textColor="@{viewModel.timerStateObserver.getTopTextColor(context)}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:formattedTime="@{viewModel.topPlayerTime}"
                 tools:text="5:00"
                 android:textSize="130sp" />
         </LinearLayout>
@@ -46,6 +47,7 @@
             android:paddingEnd="8sp"
             android:textSize="40sp"
             tools:text="5:00"
+            android:formattedTime="@{viewModel.bottomPlayerTime}"
             android:rotation="180"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/top_timer_button" />
@@ -97,6 +99,7 @@
             android:paddingStart="8sp"
             android:paddingEnd="8sp"
             tools:text="5:00"
+            android:formattedTime="@{viewModel.topPlayerTime}"
             android:textColor="@{viewModel.timerStateObserver.getBottomTextColor(context)}"
             android:background="@{viewModel.timerStateObserver.getInvertSecondaryBottomBtnColor(context)}"
             app:layout_constraintBottom_toTopOf="@id/bottom_timer_button"
@@ -116,8 +119,9 @@
                 android:id="@+id/bottom_primary_timer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="5:00"
+                android:formattedTime="@{viewModel.bottomPlayerTime}"
                 android:textSize="130sp"
+                tools:text="5:00"
                 android:textColor="@{viewModel.timerStateObserver.getBottomTextColor(context)}" />
 
         </LinearLayout>

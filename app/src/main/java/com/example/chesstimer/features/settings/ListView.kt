@@ -4,16 +4,18 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import butterknife.BindView
 import butterknife.ButterKnife
 import com.example.chesstimer.R
-import com.example.chesstimer.basic.BaseView
-import com.example.chesstimer.basic.BaseViewModel
+import com.example.chesstimer.base.BaseView
+import com.example.chesstimer.base.BaseViewModel
 import com.example.chesstimer.databinding.ListLayoutBinding
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import io.reactivex.Completable
+import io.reactivex.android.schedulers.AndroidSchedulers
 
 class ListView(inflater: LayoutInflater,  lifecycleOwner: LifecycleOwner,
                 container: ViewGroup,  model: ListViewModel) : BaseView() {
@@ -46,6 +48,7 @@ class ListView(inflater: LayoutInflater,  lifecycleOwner: LifecycleOwner,
 
         settingRecycler.layoutManager = GridLayoutManager(context , 2)
         settingRecycler.adapter = model.adapter
+
 
     }
 

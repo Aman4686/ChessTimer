@@ -1,5 +1,6 @@
 package com.example.chesstimer
 
+import android.content.Context
 import com.example.chesstimer.di.AppModule
 import com.example.chesstimer.features.creator.CreatorFragment
 import com.example.chesstimer.features.settings.ListFragment
@@ -21,6 +22,9 @@ interface AppComponent {
 
         @BindsInstance
         fun activity(activity: MainActivity): Builder
+
+        @BindsInstance
+        fun appContext(appContext: Context): Builder
 
         fun build(): AppComponent
     }

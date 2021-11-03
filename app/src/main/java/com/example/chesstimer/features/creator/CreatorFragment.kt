@@ -6,10 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
-import com.example.chesstimer.MainActivity
 import com.example.chesstimer.MainActivity.Companion.appComponent
-import com.example.chesstimer.basic.BaseFragment
-import com.example.chesstimer.features.timer.TimerViewModel
+import com.example.chesstimer.base.BaseFragment
+import com.example.chesstimer.features.creator.CreatorView.Companion.trimThis
 import dagger.Lazy
 import javax.inject.Inject
 
@@ -27,7 +26,6 @@ class CreatorFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         model = ViewModelProvider(this, factory.get())[CreatorViewModel::class.java]
-
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

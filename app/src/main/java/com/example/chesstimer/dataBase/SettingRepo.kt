@@ -1,12 +1,13 @@
 package com.example.chesstimer.dataBase
 
+import com.example.chesstimer.AppDataBase
 import com.example.chesstimer.dataBase.dao.SettingEntity
 import io.reactivex.*
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class DataBaseRepo @Inject constructor(val dataBase : AppDataBase){
+class SettingRepo @Inject constructor(val dataBase : AppDataBase){
 
     fun getAllSetings(): Flowable<List<SettingEntity>> {
         return dataBase.settingDAO().getAll()

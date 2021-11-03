@@ -1,4 +1,4 @@
-package com.example.chesstimer.dataBase
+package com.example.chesstimer
 
 import androidx.room.Database
 import androidx.room.RoomDatabase

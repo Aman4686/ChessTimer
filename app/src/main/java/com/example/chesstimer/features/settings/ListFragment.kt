@@ -7,9 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.example.chesstimer.MainActivity
 import com.example.chesstimer.MainActivity.Companion.appComponent
-import com.example.chesstimer.basic.BaseFragment
+import com.example.chesstimer.base.BaseFragment
 import com.example.chesstimer.features.timer.TimerViewModel
 import dagger.Lazy
 import io.reactivex.Completable
@@ -21,7 +20,7 @@ class ListFragment : BaseFragment(){
     lateinit var model : ListViewModel
 
     @Inject
-    lateinit var factory: Lazy<TimerViewModel.Factory>
+    lateinit var factory: Lazy<ListViewModel.Factory>
 
     override fun onAttach(context: Context) {
         appComponent.inject(this)
@@ -42,12 +41,9 @@ class ListFragment : BaseFragment(){
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         val settingView = ListView(inflater ,this , container!! , model)
-        Completable.complete()
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe {
-                model.settingListModel.observe(viewLifecycleOwner, Observer {
-                model.adapter.initSettingList(it)
-            }) }
         return settingView.viewLayout
     }
+
+
+
 }

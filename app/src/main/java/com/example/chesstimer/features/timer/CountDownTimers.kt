@@ -9,10 +9,10 @@ import com.example.chesstimer.common.states.GameTurnState
 
 class CountDownTimers(private val model : TimerViewModel){
 
-    private lateinit var bottomPrimaryTimer : TextView
-    private lateinit var topPrimaryTimer : TextView
-    private lateinit var bottomSecondaryTimer : TextView
-    private lateinit var topSecondaryTimer : TextView
+//    private lateinit var bottomPrimaryTimer : TextView
+//    private lateinit var topPrimaryTimer : TextView
+//    private lateinit var bottomSecondaryTimer : TextView
+//    private lateinit var topSecondaryTimer : TextView
 
     var gameTime: Long = 60000
 
@@ -22,14 +22,24 @@ class CountDownTimers(private val model : TimerViewModel){
     private var timerTop : CountDownTimer? = null
     private var timerBottom : CountDownTimer? = null
 
-    fun bind(bottomPrimaryTimer : TextView,topPrimaryTimer : TextView, bottomSecondaryTimer : TextView,topSecondaryTimer : TextView){
-        this.bottomPrimaryTimer = bottomPrimaryTimer
-        this.topPrimaryTimer = topPrimaryTimer
-        this.bottomSecondaryTimer = bottomSecondaryTimer
-        this.topSecondaryTimer = topSecondaryTimer
+//    fun bind(bottomPrimaryTimer : TextView,topPrimaryTimer : TextView, bottomSecondaryTimer : TextView,topSecondaryTimer : TextView){
+//        this.bottomPrimaryTimer = bottomPrimaryTimer
+//        this.topPrimaryTimer = topPrimaryTimer
+//        this.bottomSecondaryTimer = bottomSecondaryTimer
+//        this.topSecondaryTimer = topSecondaryTimer
+//    }
+
+    fun refreshState(){
+        pausedTimers()
+        bottomPlayerTimeLeft = gameTime
+        topPlayerTimeLeft = gameTime
+        prepareTimers()
+        updateTimers()
     }
 
-    fun refreshTimers(){
+    fun refreshTimers(gameTime : Long){
+        this.gameTime = gameTime
+
         pausedTimers()
         bottomPlayerTimeLeft = gameTime
         topPlayerTimeLeft = gameTime
@@ -57,15 +67,11 @@ class CountDownTimers(private val model : TimerViewModel){
     }
 
     private fun updateTopTimer(timeLeft: Long) {
-        val timeLeftFormatted = TimerUtils.getFormattedTime(timeLeft)
-        topPrimaryTimer.text = timeLeftFormatted
-        bottomSecondaryTimer.text = timeLeftFormatted
+        model.topPlayerTime.value = timeLeft
     }
 
     private fun updateBottomTimer(timeLeft: Long) {
-        val timeLeftFormatted = TimerUtils.getFormattedTime(timeLeft)
-        bottomPrimaryTimer.text = timeLeftFormatted
-        topSecondaryTimer.text = timeLeftFormatted
+        model.bottomPlayerTime.value = timeLeft
     }
 
     private fun prepareTimers(){

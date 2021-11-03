@@ -1,6 +1,6 @@
 package com.example.chesstimer.common
 
-class Duration(var timeMillis: Long) {
+data class Duration(val timeMillis: Long) {
 
     val hours = TimerUtils.millisToHours(timeMillis)
     val seconds = TimerUtils.millisToSeconds(timeMillis)

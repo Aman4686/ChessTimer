@@ -15,7 +15,7 @@ interface SettingDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(setting: SettingEntity)
 
-
+    @Update
     fun update(settingEntity: SettingEntity)
 
 }

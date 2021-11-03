@@ -1,7 +1,7 @@
 package com.example.chesstimer
 
 import android.os.Bundle
-import com.example.chesstimer.basic.BaseActivity
+import com.example.chesstimer.base.BaseActivity
 
 
 class MainActivity : BaseActivity() {
@@ -19,6 +19,7 @@ class MainActivity : BaseActivity() {
     private fun initialiseAppComponent(){
         appComponent = DaggerAppComponent.builder()
             .activity(this)
+            .appContext(applicationContext)
             .build()
     }
 }
