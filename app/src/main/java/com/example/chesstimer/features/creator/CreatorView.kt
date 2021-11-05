@@ -32,14 +32,10 @@ class CreatorView(
     @BindView(R.id.btn_save_creator)
     lateinit var save : TextView
 
-    @BindView(R.id.ed_title_creator)
-    lateinit var itemTitle : EditText
-
     @BindView(R.id.ed_time_creator)
     lateinit var itemTime : TextView
 
     lateinit var settingEntity : SettingEntity
-   // lateinit var timePickerDialog : TimePickerDialog
 
     override fun getLayoutId(): Int {
         return R.layout.creator_layout
@@ -52,13 +48,14 @@ class CreatorView(
         mDataBinding.executePendingBindings()
         mDataBinding.viewModel = model as CreatorViewModel
         viewLayout = mDataBinding.root
-        unbinder = ButterKnife.bind(this , viewLayout)
+        unbinder = ButterKnife.bind(this , mDataBinding.root)
         context = mDataBinding.root.context
     }
 
     init {
         initViewBinding(inflater , lifecycleOwner , container , model)
         initOnClick()
+        model.initCreatorEntity()
 
         model.settingLiveData.observe(lifecycleOwner, Observer {
             settingEntity = it

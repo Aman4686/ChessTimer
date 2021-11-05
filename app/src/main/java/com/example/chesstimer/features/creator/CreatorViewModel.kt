@@ -19,11 +19,8 @@ class CreatorViewModel (
 
     val settingLiveData = MutableLiveData<SettingEntity>()
 
-    init {
-        initCreatorEntity()
-    }
 
-    private fun initCreatorEntity(){
+    fun initCreatorEntity(){
         val gameId = PrefUtils.getGameConfig()
         data.getSettingById(gameId).subscribeBy{
             settingLiveData.value = it

@@ -1,12 +1,14 @@
 package com.example.chesstimer.features.timer
 
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import butterknife.BindView
 import butterknife.ButterKnife
 
@@ -16,6 +18,10 @@ import com.example.chesstimer.base.BaseView
 import com.example.chesstimer.base.BaseViewModel
 import com.example.chesstimer.common.states.TimerState
 import com.example.chesstimer.databinding.TimerLayoutBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 
 class TimerView(inflater: LayoutInflater, lifecycleOwner: LifecycleOwner,
@@ -44,11 +50,13 @@ class TimerView(inflater: LayoutInflater, lifecycleOwner: LifecycleOwner,
         viewLayout = mDataBinding.root
         unbinder = ButterKnife.bind(this , viewLayout)
         context = mDataBinding.root.context
+
     }
 
     init {
         initViewBinding(inflater , lifecycleOwner , container , model)
         initCountDownTimer(model)
+        model.initTime()
         model.timerStateObserver.observe(lifecycleOwner, Observer {
             when(it.timerState){
                 TimerState.PAUSED -> timer.pausedTimers()
@@ -64,8 +72,6 @@ class TimerView(inflater: LayoutInflater, lifecycleOwner: LifecycleOwner,
 
     fun initCountDownTimer(model: TimerViewModel){
         timer = CountDownTimers(model)
-//        timer.bind(bottomPrimaryTimer , topPrimaryTimer,
-//            bottomSecondaryTimer , topSecondaryTimer)
     }
 
     override fun getLayoutId(): Int {

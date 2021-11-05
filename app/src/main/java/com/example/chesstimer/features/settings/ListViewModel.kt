@@ -19,43 +19,22 @@ class ListViewModel constructor(
 ): BaseViewModel(){
 
     val settingListModel = MutableLiveData<List<SettingEntity>>()
-    val adapter = ListRecyclerAdapter()
-
-    init {
-        adapter.checkedPosition = PrefUtils.getGameConfig()
-        initList()
-    }
-
-
 
     fun initList() {
        data.getAllSetings().subscribeBy {
             settingListModel.value = it
        }
-//        Completable.complete()
-//            .observeOn(AndroidSchedulers.mainThread())
-//            .subscribe {
-//                    model.adapter.initSettingList(it)
-//                 }
-
     }
 
-    fun onStartClicked(v : View){
-        val index = adapter.getSelectedItemindex()
-        PrefUtils.addGameConfig(index)
-        navigator.navigateBack()
-    }
+//    fun onStartClicked(v : View){
+//        val index = adapter.getSelectedItemindex()
+//        PrefUtils.addGameConfig(index)
+//        navigator.navigateBack()
+//    }
 
-
-
-
-
-    fun onCreatorClicked(v : View){
-
-
-
-        navigator.navigateToCreator()
-    }
+//    fun onCreatorClicked(v : View){
+//        navigator.navigateToCreator()
+//    }
 
     class Factory @Inject constructor(
         private val navigator: TimerNavigator,

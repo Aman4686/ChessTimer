@@ -1,6 +1,7 @@
 package com.example.chesstimer
 
 import android.content.Context
+import androidx.navigation.NavController
 import com.example.chesstimer.di.AppModule
 import com.example.chesstimer.features.creator.CreatorFragment
 import com.example.chesstimer.features.settings.ListFragment

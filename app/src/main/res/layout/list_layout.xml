@@ -20,20 +20,11 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/setting_recycler"
             android:layout_width="match_parent"
-            android:layout_height="10dp"
-            android:layout_marginBottom="100dp"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
-
-        <ImageView
-            android:backgroundTint="@color/colorPrimaryDark"
-            android:src="@drawable/ic_pause"
-            android:layout_width="100dp"
-            android:text="jeka"
-            android:layout_height="wrap_content"
-            tools:layout_editor_absoluteX="153dp"
-            tools:layout_editor_absoluteY="514dp" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
             android:gravity="center"
@@ -43,11 +34,9 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/setting_recycler">
+            app:layout_constraintEnd_toEndOf="parent">
 
             <TextView
-                android:onClick="@{viewModel::onStartClicked}"
                 android:paddingEnd="30dp"
                 android:paddingStart="30dp"
                 android:paddingTop="5dp"
@@ -61,7 +50,7 @@
                 android:textSize="20dp"
                 android:text="START"/>
             <TextView
-                android:onClick="@{viewModel::onStartClicked}"
+                android:id="@+id/list_edit"
                 android:paddingEnd="30dp"
                 android:paddingStart="30dp"
                 android:paddingTop="5dp"
@@ -84,7 +73,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|end"
                 android:src="@drawable/ic_add"
-                android:onClick="@{viewModel::onCreatorClicked}"
                 app:fabSize="normal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

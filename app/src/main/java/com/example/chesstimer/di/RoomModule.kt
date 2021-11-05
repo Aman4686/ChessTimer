@@ -13,6 +13,7 @@ class RoomModule {
     @Singleton
     //applicationContext required
     fun provideDataBase(appContext: Context) : AppDataBase {
-        return Room.databaseBuilder(appContext, AppDataBase::class.java, "database").build()
+        val data : AppDataBase by lazy { Room.databaseBuilder(appContext, AppDataBase::class.java, "database").build() }
+        return data
     }
 }

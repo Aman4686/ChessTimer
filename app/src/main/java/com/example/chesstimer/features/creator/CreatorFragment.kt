@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import butterknife.ButterKnife
 import com.example.chesstimer.MainActivity.Companion.appComponent
 import com.example.chesstimer.base.BaseFragment
 import com.example.chesstimer.features.creator.CreatorView.Companion.trimThis
@@ -30,7 +31,7 @@ class CreatorFragment : BaseFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        val creatorView = CreatorView(inflater ,this , container!! , model , fragmentManager)
+        val creatorView = CreatorView(inflater ,this , container!! , model , parentFragmentManager)
 
         return creatorView.viewLayout
     }

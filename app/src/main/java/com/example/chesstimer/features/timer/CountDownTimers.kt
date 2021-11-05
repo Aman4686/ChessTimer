@@ -39,7 +39,6 @@ class CountDownTimers(private val model : TimerViewModel){
 
     fun refreshTimers(gameTime : Long){
         this.gameTime = gameTime
-
         pausedTimers()
         bottomPlayerTimeLeft = gameTime
         topPlayerTimeLeft = gameTime

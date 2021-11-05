@@ -28,10 +28,6 @@ class TimerViewModel constructor(val navigator : TimerNavigator,
     val bottomPlayerTime = MutableLiveData<Long>()
     val topPlayerTime = MutableLiveData<Long>()
 
-    init {
-        initTime()
-    }
-
     fun initTime(){
         val gameId = PrefUtils.getGameConfig()
 
@@ -39,7 +35,7 @@ class TimerViewModel constructor(val navigator : TimerNavigator,
             val mockedValue = SettingEntity(120000)
             data.insertSetting(mockedValue)
 
-            PrefUtils.addGameConfig(gameId)
+            PrefUtils.setGameConfig(gameId)
             settingLiveData.value = mockedValue
         },{
             settingLiveData.value = it

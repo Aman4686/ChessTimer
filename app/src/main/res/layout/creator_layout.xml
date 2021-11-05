@@ -15,107 +15,92 @@
         android:layout_height="match_parent"
         android:background="@color/colorDarkBackground">
 
-        <LinearLayout
+
+        <TextView
+            android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:text="@string/time_creator"
+            android:textColor="@color/colorWhite"
+            android:layout_marginTop="100dp"
+            android:textSize="60sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <LinearLayout
-                android:id="@+id/ll_title_creator"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/colorDarkBackground">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/title_creator"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="30sp" />
-                <!--android:text="@{viewModel.settingLiveData.title}"-->
-                <EditText
-                    android:id="@+id/ed_title_creator"
-                    android:textSize="20sp"
-                    android:textColor="@color/colorWhite"
-                    android:backgroundTint="@color/colorWhite"
-                    android:layout_width="300dp"
-                    android:layout_height="wrap_content">
-
-                </EditText>
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/et_time_creator"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/colorDarkBackground">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/time_creator"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="30sp" />
-                <TextView
-                    android:layout_marginStart="5dp"
-                    android:id="@+id/ed_time_creator"
-                    android:formattedTime="@{viewModel.settingLiveData.timeDuration}"
-                    android:textSize="25sp"
-                    android:textColor="@color/colorWhite"
-                    android:backgroundTint="@color/colorWhite"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
+        <TextView
+            android:id="@+id/ed_time_creator"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorWhite"
+            android:formattedTime="@{viewModel.settingLiveData.timeDuration}"
+            android:text="5:00"
+            android:textColor="@color/colorWhite"
+            android:textSize="55sp"
+            android:layout_marginTop="50dp"
+            app:layout_constraintEnd_toEndOf="@+id/textView"
+            app:layout_constraintStart_toStartOf="@+id/textView"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <TextView
+            android:id="@+id/btn_save_creator"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="5dp"
+            android:background="@color/gradientPartOne"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="@{viewModel::onSaveClicked}"
+            android:gravity="center"
+            android:text="save"
+            android:textSize="40dp"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+            app:layout_constraintEnd_toEndOf="@+id/linearLayout2"
+            app:layout_constraintStart_toStartOf="@+id/linearLayout2" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginBottom="20dp">
+            app:layout_constraintStart_toStartOf="parent">
 
             <TextView
-                android:onClick="@{viewModel::onListClicked}"
-                android:layout_margin="5dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 android:id="@+id/btn_list_creator"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_margin="5dp"
                 android:background="@color/gradientPartOne"
                 android:clickable="true"
                 android:focusable="true"
-                android:paddingStart="40dp"
-                android:paddingTop="5dp"
-                android:paddingEnd="40dp"
-                android:paddingBottom="5dp"
-
+                android:onClick="@{viewModel::onListClicked}"
                 android:text="list"
+                android:padding="20dp"
                 android:textSize="30sp" />
 
             <TextView
-                android:onClick="@{viewModel::onSaveClicked}"
-                android:layout_margin="5dp"
-                android:id="@+id/btn_save_creator"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:id="@+id/btn_back_creator"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_margin="5dp"
                 android:background="@color/gradientPartOne"
                 android:clickable="true"
                 android:focusable="true"
-                android:paddingStart="10dp"
-                android:paddingTop="5dp"
-                android:paddingEnd="10dp"
-                android:paddingBottom="5dp"
-                android:text="save"
+                android:padding="20dp"
+                android:onClick="@{viewModel::onBackClicked}"
+                android:text="back"
                 android:textSize="30dp" />
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

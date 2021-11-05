@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">ChessTimer</string>
-    <string name="time_creator">Time</string>
+    <string name="time_creator">Edit time</string>
     <string name="title_creator">Title</string>
 </resources>

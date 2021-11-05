@@ -15,7 +15,7 @@ object PrefUtils {
         editor = sPref.edit()
     }
 
-    fun addGameConfig(selectedItemId : Int){
+    fun setGameConfig(selectedItemId : Int){
         editor.putInt("PREF_ID_KEY", selectedItemId)
         editor.commit()
     }

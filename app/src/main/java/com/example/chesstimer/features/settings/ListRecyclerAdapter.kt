@@ -41,15 +41,14 @@ class ListRecyclerAdapter : RecyclerView.Adapter<ListRecyclerAdapter.ViewHolder>
 
     inner class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
         val time = itemView.tv_time_settingItem
-        val title = itemView.setting_item_title
         val id = itemView.tv_id_settingItem
         val itemFrame = itemView.cl_frame_settingItem
 
         fun bind(item : SettingEntity){
-            val timeFormatted = TimerUtils.getFormattedTime(item.timeDuration)
+          //  val timeFormatted = TimerUtils.getFormattedTime(item.timeDuration)
 
-            time.text = timeFormatted
-            id.text = item.id.toString()
+            time.text = item.timeDuration.formatTime
+            id.text = item.id.toString().addSelectString()
 
                 if (checkedPosition == adapterPosition) {
                     id.visibility = View.VISIBLE
@@ -66,6 +65,17 @@ class ListRecyclerAdapter : RecyclerView.Adapter<ListRecyclerAdapter.ViewHolder>
                 }
             }
         }
+
+        //TODO TEST extensions functions
+        private val Long.formatTime: String
+            get() {
+                return TimerUtils.getFormattedTime(this)
+            }
+
+        private fun String.addSelectString() : String{
+            return "Selected index -> $this"
+        }
+
     }
 
 
