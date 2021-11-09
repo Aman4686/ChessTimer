@@ -19,7 +19,7 @@
         <LinearLayout
             android:rotation="180"
             android:background="@{viewModel.timerStateObserver.getInvertPrimaryTopBtnColor(context)}"
-            android:onClick="@{viewModel::onTopButtonClicked}"
+            android:onClick="@{v -> viewModel.onTopButtonClicked(v)}"
             android:id="@+id/top_timer_button"
             android:layout_width="match_parent"
             android:layout_height="200sp"
@@ -67,11 +67,11 @@
                 android:layout_height="wrap_content"
                 android:textSize="40sp"
                 android:textColor="@color/colorPrimary"
-                android:onClick="@{viewModel::onPausedTimerClicked}"
+                android:onClick="@{v -> viewModel.onPausedTimerClicked(v)}"
                 android:src="@drawable/ic_pause"/>
             <ImageView
                 android:layout_gravity="center"
-                android:onClick="@{viewModel::onResetTimerClicked}"
+                android:onClick="@{v -> viewModel.onResetTimerClicked(v)}"
                 android:id="@+id/reset_timer"
                 android:src="@drawable/ic_refresh"
                 android:layout_width="wrap_content"
@@ -80,7 +80,7 @@
                 android:textColor="@color/colorPrimary"
                />
             <ImageView
-                android:onClick="@{viewModel::onSettingsClicked}"
+                android:onClick="@{v -> viewModel.onSettingsClicked(v)}"
                 android:layout_gravity="end"
                 android:src="@drawable/ic_settings"
                 android:id="@+id/start_timer"
@@ -111,7 +111,7 @@
             android:layout_height="200sp"
             android:gravity="center"
             android:orientation="horizontal"
-            android:onClick="@{viewModel::onBottomButtonClicked}"
+            android:onClick="@{v -> viewModel.onBottomButtonClicked(v)}"
             android:background="@{viewModel.timerStateObserver.getInvertPrimaryBottomBtnColor(context)}"
             app:layout_constraintBottom_toBottomOf="parent">
 

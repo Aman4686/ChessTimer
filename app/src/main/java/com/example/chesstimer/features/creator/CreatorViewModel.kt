@@ -4,12 +4,17 @@ import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
 import com.example.chesstimer.base.BaseViewModel
 import com.example.chesstimer.common.PrefUtils
 import com.example.chesstimer.common.navigation.TimerNavigator
 import com.example.chesstimer.dataBase.SettingRepo
 import com.example.chesstimer.dataBase.dao.SettingEntity
 import io.reactivex.rxkotlin.subscribeBy
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class CreatorViewModel (
@@ -17,34 +22,35 @@ class CreatorViewModel (
     val data : SettingRepo
 ): BaseViewModel() {
 
-    val settingLiveData = MutableLiveData<SettingEntity>()
 
+    val settingLiveData = MutableStateFlow(SettingEntity(120000))
+
+    init {
+        initCreatorEntity()
+    }
 
     fun initCreatorEntity(){
         val gameId = PrefUtils.getGameConfig()
-        data.getSettingById(gameId).subscribeBy{
-            settingLiveData.value = it
+        viewModelScope.launch(Dispatchers.IO) {
+            data.getSettingById(gameId)
+                .collect{  settingLiveData.value = it  }
         }
-    }
+     }
 
     fun onSaveClicked(v : View){
         val settingItem = settingLiveData.value
-        if(settingItem != null){
+        viewModelScope.launch {
+            data.updateSetting(settingItem)
+        }
+
+    }
+
+    fun updateSetting(settingItem : SettingEntity){
+        viewModelScope.launch {
             data.updateSetting(settingItem)
         }
     }
 
-    fun updateSetting(settingItem : SettingEntity){
-        data.updateSetting(settingItem)
-    }
-
-//    fun onAddToListClicked(title : String , time : Long){
-//        data.insertSetting(
-//            SettingEntity(
-//                 time
-//            )
-//        )
-//    }
 
     fun onBackClicked(v : View){
         navigator.navigateBack()

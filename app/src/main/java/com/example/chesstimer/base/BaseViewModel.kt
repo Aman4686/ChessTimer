@@ -1,12 +1,13 @@
 package com.example.chesstimer.base
 
 
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleObserver
-import androidx.lifecycle.OnLifecycleEvent
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
+import com.example.chesstimer.common.navigation.TimerNavigator
+import com.example.chesstimer.dataBase.SettingRepo
+import com.example.chesstimer.features.creator.CreatorViewModel
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
+import javax.inject.Inject
 
 open class BaseViewModel : ViewModel() , LifecycleObserver {
 
@@ -20,6 +21,5 @@ open class BaseViewModel : ViewModel() , LifecycleObserver {
     fun addDisposable(disposable: Disposable){
         compositeDisposable.add(disposable)
     }
-
 
 }

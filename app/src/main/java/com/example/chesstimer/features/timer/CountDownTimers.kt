@@ -2,17 +2,12 @@ package com.example.chesstimer.features.timer
 
 
 import android.os.CountDownTimer
-import android.widget.TextView
+import android.util.Log
 
 import com.example.chesstimer.common.TimerUtils
 import com.example.chesstimer.common.states.GameTurnState
 
 class CountDownTimers(private val model : TimerViewModel){
-
-//    private lateinit var bottomPrimaryTimer : TextView
-//    private lateinit var topPrimaryTimer : TextView
-//    private lateinit var bottomSecondaryTimer : TextView
-//    private lateinit var topSecondaryTimer : TextView
 
     var gameTime: Long = 60000
 
@@ -21,13 +16,6 @@ class CountDownTimers(private val model : TimerViewModel){
 
     private var timerTop : CountDownTimer? = null
     private var timerBottom : CountDownTimer? = null
-
-//    fun bind(bottomPrimaryTimer : TextView,topPrimaryTimer : TextView, bottomSecondaryTimer : TextView,topSecondaryTimer : TextView){
-//        this.bottomPrimaryTimer = bottomPrimaryTimer
-//        this.topPrimaryTimer = topPrimaryTimer
-//        this.bottomSecondaryTimer = bottomSecondaryTimer
-//        this.topSecondaryTimer = topSecondaryTimer
-//    }
 
     fun refreshState(){
         pausedTimers()
@@ -66,10 +54,12 @@ class CountDownTimers(private val model : TimerViewModel){
     }
 
     private fun updateTopTimer(timeLeft: Long) {
+        Log.d("testButonClick", "updateTopTimer:")
         model.topPlayerTime.value = timeLeft
     }
 
     private fun updateBottomTimer(timeLeft: Long) {
+        Log.d("testButonClick", "updateBottomTimer:")
         model.bottomPlayerTime.value = timeLeft
     }
 

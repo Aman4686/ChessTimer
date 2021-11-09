@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import butterknife.BindView
 import butterknife.ButterKnife
 import com.example.chesstimer.R
@@ -18,8 +19,11 @@ import com.example.chesstimer.common.TimerUtils
 import com.example.chesstimer.common.TimerUtils.hoursToMillis
 import com.example.chesstimer.common.TimerUtils.minutesToMillis
 import com.example.chesstimer.common.TimerUtils.secondsToMillis
+import com.example.chesstimer.common.states.TimerState
 import com.example.chesstimer.dataBase.dao.SettingEntity
 import com.example.chesstimer.databinding.CreatorLayoutBinding
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 class CreatorView(
     inflater: LayoutInflater,
@@ -40,7 +44,7 @@ class CreatorView(
     override fun getLayoutId(): Int {
         return R.layout.creator_layout
     }
-    override fun initViewBinding(inflater: LayoutInflater, lifecycleOwner: LifecycleOwner,
+     fun initViewBinding(inflater: LayoutInflater, lifecycleOwner: LifecycleOwner,
                                  container: ViewGroup, model: BaseViewModel
     ){
         val mDataBinding : CreatorLayoutBinding = DataBindingUtil.inflate(inflater, R.layout.creator_layout, container, false)
@@ -55,11 +59,12 @@ class CreatorView(
     init {
         initViewBinding(inflater , lifecycleOwner , container , model)
         initOnClick()
-        model.initCreatorEntity()
 
-        model.settingLiveData.observe(lifecycleOwner, Observer {
-            settingEntity = it
-        })
+
+        lifecycleOwner.lifecycleScope.launch {
+            model.settingLiveData
+                .collect{ settingEntity = it }
+        }
 
     }
 
@@ -69,14 +74,6 @@ class CreatorView(
                 val timePickerDialog = initTimePickerDialog(Duration(settingEntity.timeDuration))
                 timePickerDialog.show(fragment, "SimpleDialog")
             }
-        }
-    }
-
-
-
-    companion object{
-        fun String.trimThis(){
-            this.trim()
         }
     }
 

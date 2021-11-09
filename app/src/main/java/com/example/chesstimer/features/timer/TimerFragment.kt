@@ -8,10 +8,14 @@ import android.view.View
 import android.view.ViewGroup
 import dagger.Lazy
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import butterknife.Unbinder
 import com.example.chesstimer.MainActivity.Companion.appComponent
 import com.example.chesstimer.base.BaseFragment
 import com.example.chesstimer.common.LogUtils
+import com.example.chesstimer.common.states.TimerState
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 import javax.inject.Inject
 
@@ -30,11 +34,41 @@ class TimerFragment : BaseFragment() {
         super.onAttach(context)
     }
 
+    lateinit var timer : CountDownTimers
+
+    private fun initCountDownTimer(model: TimerViewModel){
+        timer = CountDownTimers(model)
+    }
+
+    private fun initCollectors(){
+        lifecycleScope.launch {
+            model.timerStateObserver.collect {
+                Log.d("FragmentLifecycle", "update State ")
+                when (it.timerState) {
+                    TimerState.PAUSED -> timer.pausedTimers()
+                    TimerState.RUNNING -> timer.startTimer(it.gameTurnState)
+                    TimerState.RESETED -> timer.refreshState()
+                    TimerState.FINISHED -> timer.pausedTimers()
+                }
+            }
+        }
+
+        lifecycleScope.launch {
+            model.settingStateFlow
+                .collect {
+                    Log.d("FragmentLifecycle", "update time ")
+                    model.initPlayersTime(it.timeDuration)
+                    timer.refreshTimers(it.timeDuration)
+                }
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         Log.d("FragmentLifecycle", "onCreate: ")
         super.onCreate(savedInstanceState)
         model = ViewModelProvider(this, factory.get())[TimerViewModel::class.java]
-
+        initCountDownTimer(model)
+        initCollectors()
     }
 
     override fun onStart() {
@@ -62,12 +96,12 @@ class TimerFragment : BaseFragment() {
     }
 
     override fun onPause() {
-        Log.d("FragmentLifecycle", "onStop: ")
+        Log.d("FragmentLifecycle", "onPause: ")
         super.onPause()
     }
 
     override fun onResume() {
-        Log.d("FragmentLifecycle", "onStop: ")
+        Log.d("FragmentLifecycle", "onResume: ")
         super.onResume()
     }
 }

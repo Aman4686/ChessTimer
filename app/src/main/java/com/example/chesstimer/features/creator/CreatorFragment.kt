@@ -9,7 +9,6 @@ import androidx.lifecycle.ViewModelProvider
 import butterknife.ButterKnife
 import com.example.chesstimer.MainActivity.Companion.appComponent
 import com.example.chesstimer.base.BaseFragment
-import com.example.chesstimer.features.creator.CreatorView.Companion.trimThis
 import dagger.Lazy
 import javax.inject.Inject
 

@@ -3,19 +3,21 @@ package com.example.chesstimer.dataBase.dao
 import androidx.room.*
 import io.reactivex.Flowable
 import io.reactivex.Single
+import kotlinx.coroutines.flow.Flow
+
 @Dao
 interface SettingDAO {
 
     @Query("SELECT * FROM ${SettingEntity.TABLE_NAME}")
-    fun getAll() : Flowable<List<SettingEntity>>
+    fun getAll() : Flow<List<SettingEntity>>
 
     @Query("SELECT * FROM ${SettingEntity.TABLE_NAME} WHERE :id like id")
-    fun getSettingById(id : Int) : Single<SettingEntity>
+    fun getSettingById(id : Int) : Flow<SettingEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(setting: SettingEntity)
+    suspend fun insert(setting: SettingEntity)
 
     @Update
-    fun update(settingEntity: SettingEntity)
+    suspend fun update(settingEntity: SettingEntity)
 
 }

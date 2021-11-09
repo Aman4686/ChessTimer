@@ -2,11 +2,12 @@ package com.example.chesstimer.features.timer
 
 import android.content.Context
 import android.graphics.drawable.Drawable
+import android.util.Log
 import android.view.View
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
 import com.example.chesstimer.R
 import com.example.chesstimer.base.BaseViewModel
 import com.example.chesstimer.common.PrefUtils
@@ -15,45 +16,48 @@ import com.example.chesstimer.common.states.GameTurnState
 import com.example.chesstimer.common.states.TimerState
 import com.example.chesstimer.dataBase.SettingRepo
 import com.example.chesstimer.dataBase.dao.SettingEntity
-import io.reactivex.rxkotlin.subscribeBy
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class TimerViewModel constructor(val navigator : TimerNavigator,
                                  val data : SettingRepo): BaseViewModel()  {
 
+    val timerStateObserver = MutableStateFlow(TimerStateObserver())
+    val settingStateFlow = MutableStateFlow(SettingEntity(120000))
 
-    val timerStateObserver = MutableLiveData(TimerStateObserver())
-    val settingLiveData = MutableLiveData<SettingEntity>()
+    val bottomPlayerTime = MutableStateFlow(0L)
+    val topPlayerTime = MutableStateFlow(0L)
 
-    val bottomPlayerTime = MutableLiveData<Long>()
-    val topPlayerTime = MutableLiveData<Long>()
+    init {
+        Log.d("FragmentLifecycle", "initTime")
+        initTime()
+    }
 
     fun initTime(){
         val gameId = PrefUtils.getGameConfig()
 
-        data.getSettingById(gameId).subscribeBy ({
-            val mockedValue = SettingEntity(120000)
-            data.insertSetting(mockedValue)
-
-            PrefUtils.setGameConfig(gameId)
-            settingLiveData.value = mockedValue
-        },{
-            settingLiveData.value = it
-            initPlayersTime(it.timeDuration)
-        })
+        viewModelScope.launch(Dispatchers.IO) {
+            data.getSettingById(gameId)
+                .collect{
+                    Log.d("FragmentLifecycle", "launch")
+                    settingStateFlow.emit(it)
+                }
+        }
     }
 
-    private fun initPlayersTime(time : Long){
+    fun initPlayersTime(time : Long){
         bottomPlayerTime.value = time
         topPlayerTime.value = time
     }
 
     fun pausedTimer(){
-        val timerState = timerStateObserver.value
-        if(timerState != null && timerState.timerState != TimerState.FINISHED){
-            timerState.timerState = TimerState.PAUSED
-            timerState.gameTurnState = GameTurnState.NO_ONE
-            timerStateObserver.value = timerState
+        val timer = timerStateObserver.value.copy()
+        if(timer.isNotFinished){
+            timer.timerState = TimerState.PAUSED
+            timer.gameTurnState = GameTurnState.NO_ONE
+            timerStateObserver.value = timer
         }
     }
 
@@ -63,39 +67,26 @@ class TimerViewModel constructor(val navigator : TimerNavigator,
 
     fun onTopButtonClicked(v : View) {
         val timer = timerStateObserver.value
-        if(timer != null) {
-            val isNotFinished = timer.timerState != TimerState.FINISHED
-            val isTopPlayerTurn = timer.gameTurnState != GameTurnState.PLAYER_BOTTOM
-            if (isTopPlayerTurn && isNotFinished) {
-                timer.timerState = TimerState.RUNNING
-                timer.gameTurnState = GameTurnState.PLAYER_BOTTOM
-                timerStateObserver.value = timer
+            if (timer.isTopPlayerTurn && timer.isNotFinished) {
+                val result = TimerStateObserver(GameTurnState.PLAYER_BOTTOM , TimerState.RUNNING)
+                timerStateObserver.value = result
             }
-        }
-
-
     }
 
     fun onBottomButtonClicked(v : View) {
         val timer = timerStateObserver.value
-        if (timer != null) {
-            val isNotFinished = timer.timerState != TimerState.FINISHED
-            val isBottomPlayerTurn = timer.gameTurnState != GameTurnState.PLAYER_TOP
-            if (isBottomPlayerTurn && isNotFinished) {
-                timer.timerState = TimerState.RUNNING
-                timer.gameTurnState = GameTurnState.PLAYER_TOP
-                timerStateObserver.value = timer
+            if (timer.isBottomPlayerTurn && timer.isNotFinished) {
+                val result = TimerStateObserver(GameTurnState.PLAYER_TOP , TimerState.RUNNING)
+                timerStateObserver.value = result
             }
-        }
     }
 
     fun onResetTimerClicked(v : View){
-        val timer = timerStateObserver.value
-        if (timer != null) {
-            timer.timerState = TimerState.RESETED
-            timer.gameTurnState = GameTurnState.NO_ONE
+        val timer = timerStateObserver.value.copy(
+            gameTurnState = GameTurnState.NO_ONE,
+            timerState = TimerState.RESETED
+        )
             timerStateObserver.value = timer
-        }
     }
 
     fun onSettingsClicked(v : View){
@@ -104,11 +95,8 @@ class TimerViewModel constructor(val navigator : TimerNavigator,
     }
 
     fun gameFinished(){
-        val timer = timerStateObserver.value
-        if (timer != null) {
-            timer.timerState = TimerState.FINISHED
+        val timer = timerStateObserver.value.copy(timerState = TimerState.FINISHED)
             timerStateObserver.value = timer
-        }
     }
 
     class Factory @Inject constructor(
@@ -122,9 +110,13 @@ class TimerViewModel constructor(val navigator : TimerNavigator,
         }
     }
 
-    class TimerStateObserver(
+  data class TimerStateObserver(
         var gameTurnState: GameTurnState = GameTurnState.NO_ONE,
         var timerState: TimerState = TimerState.PAUSED){
+
+        val isNotFinished get() = timerState != TimerState.FINISHED
+        val isBottomPlayerTurn get() = gameTurnState != GameTurnState.PLAYER_TOP
+        val isTopPlayerTurn get() = gameTurnState != GameTurnState.PLAYER_BOTTOM
 
         private fun getPrimaryBtnColor(timerState: TimerState , context: Context) : Drawable?{
             return if(timerState == TimerState.FINISHED){
@@ -189,4 +181,6 @@ class TimerViewModel constructor(val navigator : TimerNavigator,
             }
         }
     }
+
+
 }

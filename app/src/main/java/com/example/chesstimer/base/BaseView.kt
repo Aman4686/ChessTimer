@@ -15,11 +15,4 @@ abstract class BaseView {
 
     abstract fun getLayoutId(): Int
 
-    abstract fun initViewBinding(inflater: LayoutInflater, lifecycleOwner: LifecycleOwner,
-                                container: ViewGroup, model: BaseViewModel)
-
-
-
-
-
 }
