@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.example.chesstimer.base.BaseViewModel
 import com.example.chesstimer.common.PrefUtils
 import com.example.chesstimer.common.navigation.TimerNavigator
 import com.example.chesstimer.dataBase.SettingRepo
@@ -20,7 +19,7 @@ import javax.inject.Inject
 class CreatorViewModel (
     val navigator : TimerNavigator,
     val data : SettingRepo
-): BaseViewModel() {
+): ViewModel() {
 
 
     val settingLiveData = MutableStateFlow(SettingEntity(120000))
@@ -33,7 +32,9 @@ class CreatorViewModel (
         val gameId = PrefUtils.getGameConfig()
         viewModelScope.launch(Dispatchers.IO) {
             data.getSettingById(gameId)
-                .collect{  settingLiveData.value = it  }
+                .collect{
+                    //settingLiveData.value = it
+                }
         }
      }
 

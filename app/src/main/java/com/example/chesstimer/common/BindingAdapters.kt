@@ -1,4 +1,4 @@
-package com.example.chesstimer.features.creator
+package com.example.chesstimer.common
 
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
@@ -11,7 +11,5 @@ object BindingAdapters {
     fun TextView.formattedTime(time : Long){
         text = TimerUtils.getFormattedTime(time)
     }
-
-
 
 }

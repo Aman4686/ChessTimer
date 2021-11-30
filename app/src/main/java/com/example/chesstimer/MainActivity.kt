@@ -1,10 +1,10 @@
 package com.example.chesstimer
 
 import android.os.Bundle
-import com.example.chesstimer.base.BaseActivity
+import androidx.appcompat.app.AppCompatActivity
 
 
-class MainActivity : BaseActivity() {
+class MainActivity : AppCompatActivity() {
 
     companion object{
         lateinit var appComponent: AppComponent
